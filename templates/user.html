@@ -1,0 +1,148 @@
+{% extends "index.html" %}
+
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static "css/user.css" %}">
+{% endblock css %}
+
+{% block section %}
+<form id="user-profile-form">
+
+    <div id="profile-container">
+        <img id="profile-picture" src="static/img/default.png" alt="Profile Picture">
+    </div>
+    <div id="profile-container">
+        <label for="file-input" class="buttons">Upload Picture</label>
+        <input type="file" id="file-input" accept="image/*">
+        <button type="button" onclick="removeProfilePicture()" class="buttons">Remove Picture</button>
+    </div>
+    <div class=" container">
+        <label for="firstname">First Name:</label>
+        <div id="firstname" class="non-editable"></div>
+
+        <label for="middlename">Middle Name:</label>
+        <div id="middlename" class="non-editable"></div>
+
+        <label for="lastname">Last Name:</label>
+        <div id="lastname" class="non-editable"></div>
+    </div>
+
+    <div class=" container">
+        <label for="username">Username:</label>
+        <div id="username" class="non-editable"></div>
+
+        <label for="email">Email:</label>
+        <div id="email" class="non-editable"></div>
+    </div> 
+
+    <div class="container">
+        <label for="address_line_1">Address Line 1:</label>
+        <div id="address_line_1" class="non-editable"></div>
+        
+        <label for="address_line_2">Address Line 2:</label>
+        <div id="address_line_2" class="non-editable"></div>
+    </div>
+
+    <div class="container">
+        <label for="city">City:</label>
+        <div id="city" class="non-editable"></div>
+
+        <label for="pincode">Pincode:</label>
+        <div id="pincode" class="non-editable"></div>
+    </div>
+
+    <div class="container">
+        <label for="state">State:</label>
+        <div id="state" class="non-editable"></div>
+
+        <label for="country">Country:</label>
+        <div id="country" class="non-editable"></div>
+    </div>
+
+    <div class="container">
+        <label for="dob">Date of birth:</label>
+        <div id="dob" class="non-editable"></div>
+
+        <label for="gender">Gender:</label>
+        <div id="gender" class="non-editable"></div>
+    </div>
+
+    <div class="container">
+        <label for="qualification">Qualifications:</label>
+        <div id="qualification" class="non-editable"></div>
+
+        <label for="position">Position:</label>
+        <div id="position" class="non-editable"></div>
+    </div>
+
+    <div class="container">
+        <label for="department">Department:</label>
+        <div id="department" class="non-editable"></div>
+    
+        <label for="reporting">Reports To:</label>
+        <div id="reporting" class="non-editable"></div>
+    </div>
+
+    <div class="container">
+        <button type="button" class="buttons" id="change-password-button">Change Password</button>
+
+        <button type="button" class="buttons" id="change-address-button">Change Address</button>
+    </div>
+
+    <div id="password-container" style="display: none;">
+        <div class="container">
+            <label for="currentPassword">Current Password:</label>
+            <input type="password" id="currentPassword" class="editable" placeholder="Enter current password">
+            <i class="far fa-eye-slash" id="toggleCurrentPassword" onclick="togglePasswordVisibility('currentPassword', 'toggleCurrentPassword')"></i>
+        </div>
+
+        <div class="container">
+            <label for="newPassword">New Password:</label>
+            <input type="password" id="newPassword" class="editable" placeholder="Enter new password">
+            <i class="far fa-eye-slash" id="toggleNewPassword" onclick="togglePasswordVisibility('newPassword', 'toggleNewPassword')"></i>
+        </div>
+
+        <div class="container">
+            <label for="confirmPassword">Confirm new Password:</label>
+            <input type="password" id="confirmPassword" class="editable" placeholder="Enter new password again">
+            <i class="far fa-eye-slash" id="toggleConfirmPassword" onclick="togglePasswordVisibility('confirmPassword', 'toggleConfirmPassword')"></i>
+        </div>
+    </div>
+
+    <div id="address-container" style="display: none;">
+        <div class="container">
+            <label for="new_address_line_1">Address Line 1:</label>
+            <input type="text" id="new_address_line_1" class="editable" placeholder="Enter address line 1">
+
+            <label for="new_address_line_2">Address Line 2:</label>
+            <input type="text" id="new_address_line_2" class="editable" placeholder="Enter address line 2">
+        </div>
+
+        <div class="container">
+            <label for="new_city">City:</label>
+            <input type="text" id="new_city" class="editable" placeholder="Enter city">
+
+            <label for="new_pincode">Pincode:</label>
+            <input type="text" id="new_pincode" class="editable" placeholder="Enter pincode">
+        </div>
+
+        <div class="container">
+            <label for="new_state">State:</label>
+            <input type="text" id="new_state" class="editable" placeholder="Enter state">
+
+            <label for="new_country">Country:</label>
+            <input type="text" id="new_country" class="editable" placeholder="Enter country">
+        </div>
+    </div>
+
+    <div class="container">
+        <button type="button" class="buttons" onclick="saveChanges()" id="save-changes-button">Save Changes</button>
+    </div>
+
+</form>
+{% endblock section %}
+
+{% block script %}
+{% load static %}
+<script src="{% static "js/user.js" %}"></script>
+{% endblock script %}

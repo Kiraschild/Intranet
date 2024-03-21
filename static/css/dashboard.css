@@ -1,0 +1,107 @@
+:root {
+    --primary-color: #4747a1;
+    --secondary-color:#f4f7fe;
+}
+
+.container {
+    display: flex;
+    margin: 5px;
+    text-align: center;
+}
+
+.container .announcement {
+    border-radius: 10px;
+    padding: 10px;
+    width: 60%;
+    margin: 10px;
+    height: 50vh;
+    overflow: scroll;
+    background: #ffffff;
+    text-align: center;
+}
+
+.container .announcement .content {
+    display: flex;
+    text-align: center;
+    border: 1px solid;
+    border-radius: 10px;
+    margin: 10px;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.01s ease;
+}
+
+.container .announcement .content:hover {
+    background-color: var(--secondary-color); /* Change the color on hover */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Add box shadow on hover */
+    font-weight: bold;
+}
+
+.container .birthday {
+    border-radius: 10px;
+    padding: 10px;
+    flex: 1;
+    margin: 10px;
+    height: 50vh;
+    overflow: scroll;
+    background: #ffffff;
+}
+
+.container .birthday .content {
+    display: flex;
+    text-align: center;
+    border: 1px solid;
+    border-radius: 10px;
+    margin: 10px;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.01s ease;
+}
+
+.container .birthday .content:hover {
+    background-color: var(--secondary-color); /* Change the color on hover */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Add box shadow on hover */
+    font-weight: bold;
+}
+
+.container .birthday .content .profile img {
+    height: 75px;
+    width: 75px;
+    border-radius: 100%;
+    vertical-align: middle;
+}
+
+.container .birthday .content .profile, .caption {
+    margin: 5px;
+}
+
+.container .tasks {
+    border-radius: 10px;
+    padding: 10px;
+    flex: 1;
+    margin: 10px;
+    height: 50vh;
+    overflow: scroll;
+    background: #ffffff;
+}
+
+.container .tasks .content {
+    display: flex;
+    text-align: center;
+    border: 1px solid;
+    border-radius: 10px;
+    margin: 10px;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.01s ease;
+}
+
+.container .tasks .content:hover {
+    background-color: var(--secondary-color); /* Change the color on hover */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Add box shadow on hover */
+    font-weight: bold;
+}
+
+.container ::-webkit-scrollbar {
+    display: none;
+}

@@ -1,0 +1,93 @@
+{% extends "index.html" %}
+
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static "css/dashboard.css" %}">
+{% endblock css %}
+
+{% block section %}
+<div class='container'>
+    <div class="announcement">
+        <div class="heading">
+            <h1>Announcements</h1>
+        </div>
+        <div class="data">
+            <div class="content">Introducing our groundbreaking product set to redefine industry standards, delivering
+                unmatched performance and user experience.</div>
+
+            <div class="content">Exciting collaboration alert! We've joined forces with a key industry player to amplify
+                innovation and bring greater value to our users.</div>
+
+            <div class="content">Your data's safety is our priority. We've implemented top-tier security features to
+                ensure your privacy is protected.</div>
+
+            <div class="content">Big news! We're expanding into new markets, bringing our innovative solutions to a
+                broader audience. Stay tuned for updates on our global journey.</div>
+
+            <div class="content">Join our community engagement initiative! Your feedback and experiences will shape the
+                future of our products. Let's collaborate and innovate together.</div>
+
+            <div class="content">Going green! We're proud to launch eco-friendly initiatives, dedicated to reducing our
+                carbon footprint and building a sustainable future.</div>
+        </div>
+    </div>
+    <div class="birthday">
+        <div class="heading">
+            <h1>Birthdays</h1>
+        </div>
+        <div class="data">
+            <div class="content">
+                <div class="profile">
+                    <img src="static/img/default.png" alt="profile">
+                </div>
+                <div class="caption">
+                    Wish Vedant Mehta a happy birthday today!
+                </div>
+            </div>
+            <div class="content">
+                <div class="profile">
+                    <img src="static/img/default.png" alt="profile">
+                </div>
+                <div class="caption">
+                    Wish Vidhisha Amle a happy birthday today!
+                </div>
+            </div>
+            <div class="content">
+                <div class="profile">
+                    <img src="static/img/default.png" alt="profile">
+                </div>
+                <div class="caption">
+                    Wish Vedant Patel a happy birthday today!
+                </div>
+            </div>
+            <div class="content">
+                <div class="profile">
+                    <img src="static/img/default.png" alt="profile">
+                </div>
+                <div class="caption">
+                    Wish Jwal Shah a happy birthday today!
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="tasks">
+        <div class="heading">
+            <h1>Pending Tasks</h1>
+        </div>
+        <div class="data">
+            <div class="content">Going green! We're proud to launch eco-friendly initiatives, dedicated to reducing our
+                carbon footprint and building a sustainable future.</div>
+            <div class="content">Going green! We're proud to launch eco-friendly initiatives, dedicated to reducing our
+                carbon footprint and building a sustainable future.</div>
+            <div class="content">Going green! We're proud to launch eco-friendly initiatives, dedicated to reducing our
+                carbon footprint and building a sustainable future.</div>
+            <div class="content">Going green! We're proud to launch eco-friendly initiatives, dedicated to reducing our
+                carbon footprint and building a sustainable future.</div>
+            <div class="content">Going green! We're proud to launch eco-friendly initiatives, dedicated to reducing our
+                carbon footprint and building a sustainable future.</div>
+        </div>
+    </div>
+</div>
+{% endblock section %}

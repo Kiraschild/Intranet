@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Techsture Technologies</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static "css/index.css" %}">
+    {% block css %}{% endblock css %}
+    <!-- Boxicons CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- Icon for displaying the password -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="logo-details">
+            <img src="static/img/techsture_icon.webp" alt="techsture_icon">
+            <div class="logo_name">Techsture Technologies</div>
+            <i class='bx bx-menu' id="btn"></i>
+        </div>
+
+        <ul class="nav-list">
+            <li>
+                <i class='bx bx-search'></i>
+                <input type="text" placeholder="Search...">
+                <span class="tooltip">Search</span>
+            </li>
+            <li>
+                <a href="/home" id="home_button">
+                    <i class='bx bx-home'></i>
+                    <span class="links_name">Home</span>
+                </a>
+                <span class="tooltip">Home</span>
+            </li>
+            <li>
+                <a href="/dashboard" id="dashboard_button">
+                    <i class='bx bx-grid-alt'></i>
+                    <span class="links_name">Dashboard</span>
+                </a>
+                <span class="tooltip">Dashboard</span>
+            </li>
+            <li>
+                <a href="/user" id="user_button">
+                    <i class='bx bx-user'></i>
+                    <span class="links_name">User</span>
+                </a>
+                <span class="tooltip">User</span>
+            </li>
+            <li>
+                <a href="/task" id="task_button">
+                    <i class='bx bx-task-x'></i>
+                    <span class="links_name">Tasks</span>
+                </a>
+                <span class="tooltip">Tasks</span>
+            </li>
+            <li>
+                <a href="/timesheet" id="timesheet_button">
+                    <i class='bx bx-time'></i>
+                    <span class="links_name">Timesheet</span>
+                </a>
+                <span class="tooltip">Timesheet</span>
+            </li>
+            <li>
+                <a href="/leave" id="leave_button">
+                    <i class='bx bx-notepad'></i>
+                    <span class="links_name">Leave Approval</span>
+                </a>
+                <span class="tooltip">Leave Approval</span>
+            </li>
+            <li class="profile">
+                <div class="profile-details">
+                    <img src="static/img/profile.jpg" alt="profileImg">
+                    <div class="name_job">
+                        <div class="name">Vedant Mehta</div>
+                        <div class="job">Web designer</div>
+                    </div>
+                </div>
+                <a href="#" id="logout_button">
+                    <i class='bx bx-log-out' id="log_out" onclick="showConfirmationDialog()"></i>
+                    <span class="links_name">Logout</span>
+                </a>
+                <span class="tooltip">Logout</span>
+            </li>
+        </ul>
+    </div>
+
+    <section class="home-section">
+        {% block section %}{% endblock section %}
+    </section>
+
+    <div id="overlay"></div>
+    <div id="confirmationModal">
+        <h2>Logout Confirmation</h2>
+        <p>Are you sure you want to logout?</p>
+        <button onclick="confirmLogout()">Yes</button>
+        <button onclick="cancelLogout()">No</button>
+    </div>
+
+    <script src="{% static "js/index.js" %}"></script>
+    {% block script %}{% endblock script %}
+</body>
+
+</html>
