@@ -2,15 +2,15 @@ window.addEventListener("load", function () {
     setTimeout(function () {
         let sidebar = document.querySelector(".sidebar");
         let closeBtn = document.querySelector("#btn");
-        let searchBtn = document.querySelector(".bx-search");
+        // let searchBtn = document.querySelector(".bx-search");
 
         closeBtn.addEventListener("click", () => {
             toggleSidebar();
         });
 
-        searchBtn.addEventListener("click", () => {
-            toggleSidebar();
-        });
+        // searchBtn.addEventListener("click", () => {
+        //     toggleSidebar();
+        // });
 
         function toggleSidebar() {
             sidebar.classList.toggle("open");
