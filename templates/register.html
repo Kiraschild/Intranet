@@ -31,20 +31,42 @@
                                 <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div>
                             </div>
                             <div class="row justify-content-between text-left">
-                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3"><span class="text-danger"> *</span></label> <input type="text" id="email" name="email" placeholder="" onblur="validate(3)"> </div>
-                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Phone number<span class="text-danger"> *</span></label> <input type="text" id="mob" name="mob" placeholder="" onblur="validate(4)"> </div>
+                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Address<span class="text-danger"> *</span></label> <input type="text" id="address" name="address" placeholder="Enter permanent address" onblur="validate(1)"> </div>
+                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">City<span class="text-danger"> *</span></label> <input type="text" id="city" name="city" placeholder="Enter city" onblur="validate(1)"> </div>
+                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">State<span class="text-danger"> *</span></label> <input type="text" id="state" name="state" placeholder="Enter state" onblur="validate(2)"> </div>
+                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Pincode<span class="text-danger"> *</span></label> <input type="text" id="pincode" name="pincode" placeholder="Enter pincode" onblur="validate(1)"> </div>
+                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Country<span class="text-danger"> *</span></label> <input type="text" id="country" name="country" placeholder="Enter country" onblur="validate(1)"> </div>
                             </div>
                             
                             <div class="row justify-content-between text-left">
-                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Job title<span class="text-danger"> *</span></label> <input type="text" id="job" name="job" placeholder="" onblur="validate(5)"> </div>
+                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Date of Birth<span class="text-danger">*</span></label> <input type="date" id="dob" name="dob" placeholder="" onblur="validate(3)"> </div>
+                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Gender<span class="text-danger"> *</span></label><br>
+                                    <input type="radio" id="male" name="gender" value="M" required>
+                                    <label for="male">Male</label><br>
+                                    <input type="radio" id="female" name="gender" value="F">
+                                    <label for="female">Female</label><br>
+                                    <input type="radio" id="other" name="gender" value="O">
+                                    <label for="other">Other</label><br><br> </div>
                             </div>
+
                             <div class="row justify-content-between text-left">
-                                <div class="form-group col-12 flex-column d-flex"> <label class="form-control-label px-3">What would you be using Flinks for?<span class="text-danger"> *</span></label> <input type="text" id="ans" name="ans" placeholder="" onblur="validate(6)"> </div>
+                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Qualification<span class="text-danger"> *</span></label> <input type="text" id="qualification" name="qualification" placeholder="Enter Qualification" onblur="validate(1)"> </div>
+                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Position<span class="text-danger"> *</span></label> <input type="text" id="position" name="position" placeholder="Enter job title" onblur="validate(1)"> </div>
+                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Department<span class="text-danger"> *</span></label> <input type="text" id="department" name="department" placeholder="Enter department" onblur="validate(2)"> </div>
+                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Reports To<span class="text-danger"> *</span></label> <input type="text" id="reportsto" name="reportsto" placeholder="Enter name of mentor" onblur="validate(1)"> </div>
                             </div>
+                            
+                            <div class="row justify-content-between text-left">
+                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Email<span class="text-danger">*</span></label> <input type="text" id="email" name="email" placeholder="" onblur="validate(3)"> </div>
+                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Phone number<span class="text-danger"> *</span></label> <input type="text" id="phno" name="phno" placeholder="" onblur="validate(4)"> </div>
+                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3"><label for="profilepic">Profile Picture:</label><input type="file" id="profilepic" name="profilepic"><br><br>
+                            </div>
+
+                    
                             <div class="row justify-content-end">
-                                <div class="form-group col-sm-6"> <button type="submit" class="btn-block btn-primary">Request a demo</button> </div>
+                                <div class="form-group col-sm-6"> <button type="submit" class="btn-block btn-primary">Register</button> </div>
                             </div>
-                            <label for="dateofbirth">Date of Birth:</label><br>
+                            
                        
                     </div>
                 </div>

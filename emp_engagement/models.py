@@ -11,7 +11,7 @@ class user_credentials(models.Model):
     
 class user_data(models.Model):
     Username= models.CharField(max_length=30)
-    Password= models.CharField(max_length=15)
+    Password= models.CharField(max_length=15,default="admin123")
     FirstName= models.CharField(max_length=100)
     MiddleName= models.CharField(max_length=100, blank=True)
     LastName = models.CharField(max_length=100)
@@ -31,7 +31,9 @@ class user_data(models.Model):
     Position = models.CharField(max_length=100)
     Department = models.CharField(max_length=100)
     Reportsto= models.CharField(max_length=50,default= None)
-    is_user = models.BooleanField(default=True)
+    Email = models.EmailField(unique=True)
+    Phone_number = models.CharField(max_length=15)
+    is_user = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
     Profilepic = models.ImageField(upload_to='profile_pics/', blank=True, null=True)
     
