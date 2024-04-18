@@ -23,11 +23,11 @@
         </div>
 
         <ul class="nav-list">
-            <li>
+            {% comment %} <li>
                 <i class='bx bx-search'></i>
                 <input type="text" placeholder="Search...">
                 <span class="tooltip">Search</span>
-            </li>
+            </li> {% endcomment %}
             <li>
                 <a href="/home" id="home_button">
                     <i class='bx bx-home'></i>
@@ -48,6 +48,13 @@
                     <span class="links_name">User</span>
                 </a>
                 <span class="tooltip">User</span>
+            </li>
+            <li>
+                <a href="/event" id="event_button">
+                    <i class='bx bx-calendar'></i>
+                    <span class="links_name">Events</span>
+                </a>
+                <span class="tooltip">Events</span>
             </li>
             <li>
                 <a href="/task" id="task_button">

@@ -113,6 +113,10 @@ def user(request):
     return render(request, 'user.html')
 
 @login_access_only
+def event(request): 
+    return render(request, 'event_calendar.html')
+
+@login_access_only
 def task(request): 
     return render(request, 'task.html')
 
