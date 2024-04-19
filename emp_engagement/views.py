@@ -5,12 +5,13 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.urls import reverse
-from .decorators import login_access_only
+from .decorators import login_access_only, isUser
 
 # Create your views here.
 
 def login_page(request):
     return render(request, 'login.html')
+
 
 def login_user(request):
     if request.method == "POST":
@@ -21,11 +22,16 @@ def login_user(request):
         try:
             user= user_data.objects.get(Username=username)
             print(user)
-            if user.Password == password:
+            print(user.is_user)
+            if user.Password == password and user.is_user== True:
                 request.session['username'] = username
+                display_name= user.FirstName + " " + user.LastName
+                quali= user.Qualifications
+                profile_pic_url= user.Profilepic.url
+                print(profile_pic_url)
                 messages.success(request,"Successfully logged in!")
                 print("User logged in",user)
-                return redirect('index/')
+                return render(request,'index.html',{'display_name': display_name, 'quali':quali, 'profile_pic_url':profile_pic_url})
             else :
                 messages.error(request,"Check Credentials")
                 return render(request,'login.html')
@@ -57,11 +63,19 @@ def register_user(request):
         email=request.POST.get('email')
         phonenumber=request.POST.get('phno')
         profilepic = request.FILES.get('profilepic') 
+        print(profilepic)
+        if profilepic == None and gender=="M":
+            profilepic="profile_pics/default_male_pic.png"
+        elif profilepic == None and gender == "F":
+            profilepic = "profile_pics/default_female_pic.png" 
+        if password == "":
+            password="admin123"
         print(username)
         print(password)
         print(firstname)
         print(middlename)
         print(lastname)
+        print(profilepic)
         USERDATA = user_data.objects.create(
             Username=username,
             Password=password,

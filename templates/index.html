@@ -79,10 +79,10 @@
             </li>
             <li class="profile">
                 <div class="profile-details">
-                    <img src="static/img/profile.jpg" alt="profileImg">
+                    <img src="{{ profile_pic_url }}" alt="profileImg">
                     <div class="name_job">
-                        <div class="name">Vedant Mehta</div>
-                        <div class="job">Web designer</div>
+                        <div class="name">{{ display_name }}</div>
+                        <div class="job">{{ quali }}</div>
                     </div>
                 </div>
                 <a href="#" id="logout_button">

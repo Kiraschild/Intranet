@@ -11,7 +11,7 @@ class user_credentials(models.Model):
     
 class user_data(models.Model):
     Username= models.CharField(max_length=30)
-    Password= models.CharField(max_length=15,default="admin123")
+    Password= models.CharField(default="admin123",max_length=15)
     FirstName= models.CharField(max_length=100)
     MiddleName= models.CharField(max_length=100, blank=True)
     LastName = models.CharField(max_length=100)
@@ -35,7 +35,7 @@ class user_data(models.Model):
     Phone_number = models.CharField(max_length=15)
     is_user = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
-    Profilepic = models.ImageField(upload_to='profile_pics/', blank=True, null=True)
+    Profilepic = models.ImageField(default='default_male_pic.png', upload_to='profile_pics/', blank=True, null=True)
     
     def __str__(self):
         return self.Username
