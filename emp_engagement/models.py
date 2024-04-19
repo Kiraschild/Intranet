@@ -56,9 +56,11 @@ class Event(models.Model):
 class TimeSheetData(models.Model):
     username = models.CharField(max_length=30)
     date = models.DateField(auto_now_add=True)
-    check_in_time = models.DateTimeField(null=True, blank=True)
-    check_out_time = models.DateTimeField(null=True, blank=True)
-    total_time = models.DurationField(null=True, blank=True)
+    check_in_time = models.TimeField(null=True,blank=True)
+    check_out_time = models.TimeField(null=True,blank=True)
+    # total_time = models.TimeField(null=True, blank=True)
+    total_time = models.CharField(max_length=8, default='')
+    
 
-    def _str_(self):
+    def str(self):
         return self.username

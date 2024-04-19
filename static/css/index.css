@@ -78,7 +78,6 @@
     font-size: 20px;
     font-weight: 600;
     opacity: 0;
-    transition: all 0.5s ease;
 }
 
 .sidebar.open .logo-details img,
@@ -153,7 +152,6 @@
     transition: all 0.4s ease;
     top: 50%;
     transform: translateY(-50%);
-    /* font-weight: bold; */
 }
 
 .sidebar.open li .tooltip {
@@ -237,7 +235,7 @@
 .sidebar li a:hover i {
     transition: all 0.5s ease;
     color: var(--primary-color);
-    /* font-weight: bold; */
+    font-weight: 500;
 }
 
 .sidebar li i {
@@ -342,8 +340,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: var(--primary-color);
-    color: var(--secondary-color);
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
     padding: 20px;
     border-radius: 5px;
     z-index: 1000;
@@ -354,13 +352,22 @@
 }
 
 #confirmationModal button {
+    font-size: 15px;
+    height: auto;
+    width:auto;
     padding: 5px;
-    margin: 5px;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    border-radius: 10px;
+    border: 0px;
+    font-weight: 200;
+    padding: 10px;
+    margin: 10px;
+}
+
+#confirmationModal button:hover {
     cursor: pointer;
-    color: var(--primary-color);
-    border-radius: 10%;
-    background-color: var(--secondary-color);
-    font-weight: bold;
+    font-weight: 400;
 }
 
 #overlay {
@@ -377,3 +384,10 @@
 #log_out:hover {
     color: var(--secondary-color);
 }
+
+.sidebar.closed .logo_name {
+    opacity: 1;
+    pointer-events: auto;
+    margin-left: 1000px; /* Add margin to create space so that month can be clicked */
+  }
+  

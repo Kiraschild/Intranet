@@ -1,4 +1,77 @@
 {% extends "index.html" %}
+
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static "css/leave.css" %}">
+{% endblock css %}
+
 {% block section %}
-Leave page
+
+<div id="overlayForm"></div>
+
+<div class="container">
+
+    <div id="profile-container">
+        <button type="button" onclick="showForm()" class="buttons">Apply for new leave</button>
+    </div>
+
+    <form id="leaveFormContent" method="POST">
+        <!-- CSRF token for security -->
+        {% csrf_token %}
+
+        <!-- Leave ID field -->
+        <div class="form-group">
+            <label id="leave_id" for="leave_id">Leave ID:</label>
+        </div>
+
+        <!-- Leave Date field -->
+        <div class="form-group">
+            <label for="leave_Startdate">Start Date:</label>
+            <input type="date" id="leave_Startdate" name="leave_Startdate" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label for="leave_Enddate">End Date:</label>
+            <input type="date" id="leave_Enddate" name="leave_Enddate" class="form-control" required>
+        </div>
+
+        <!-- Subject field -->
+        <div class="form-group">
+            <label for="subject">Subject:</label>
+            <input type="text" id="subject" name="subject" class="form-control" required>
+        </div>
+
+        <!-- Status field -->
+        <div class="form-group">
+            <label for="status">Status: Not yet approved</label>
+        </div>
+
+        <!-- Submit button -->
+        <button type="button" onclick="submitleaveform(event)">Submit</button>
+        <button type="button" class="cancel_button" onclick="cancelButton()">Cancel</button>
+    </form>
+
+    <div id="leavesection2heading">Previous Records</div>
+    <table id="leaveRecordsTable">
+        <thead>
+            <tr>
+                <th>Leave ID</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Total Days</th>
+                <th>Leave Subject</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Rows will be added dynamically -->
+        </tbody>
+    </table>
+</div>
+
 {% endblock section %}
+
+{% block script %}
+{% load static %}
+<script src="{% static "js/leave.js" %}"></script>
+{% endblock script %}

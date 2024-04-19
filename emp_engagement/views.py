@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.urls import reverse
 from .decorators import login_access_only, isUser
+import datetime
 
 # Create your views here.
 
@@ -335,7 +336,8 @@ def event(request):
     else:
         # events = Event.objects.filter(username=currentUser)
         events = Event.objects.all()
-        return render(request,'event.html',{'display_name': display_name, 'position':position, 'profile_pic_url':profile_pic_url, 'events': events})
+        event_data = Event.objects.filter(username=request.session.get('username'))
+        return render(request,'event.html',{'display_name': display_name, 'position':position, 'profile_pic_url':profile_pic_url, 'events': event_data})
 
 
 @login_access_only
@@ -347,6 +349,7 @@ def task(request):
 
 @login_access_only
 def timesheet(request):
+    timezone.activate("Asia/Kolkata")
     display_name= request.session.get('display_name')
     position = request.session.get('position')
     profile_pic_url = request.session.get('profile_pic_url') 
@@ -354,14 +357,45 @@ def timesheet(request):
         username = request.session.get('username')  # Retrieve username from session
         if 'check_in' in request.POST:
             # Handle login action
-            TimeSheetData.objects.create(username=username, check_in_time=timezone.now())
+            TimeSheetData.objects.create(username=username, check_in_time=timezone.localtime(timezone.now()))
         elif 'check_out' in request.POST:
             # Handle logout action
-            last_entry = TimeSheetData.objects.filter(username=username).order_by('-date').last()
+            last_entry = TimeSheetData.objects.filter(username=username).order_by('-date', '-check_in_time').first()
+
+            print(last_entry.check_in_time)
             if last_entry:
-                last_entry.check_out_time = timezone.now()
-                last_entry.total_time = last_entry.check_out_time - last_entry.check_in_time
+                last_entry.check_out_time = timezone.localtime(timezone.now()).time()
+                # temp_last_check_in_time = last_entry.check_in_time
+                # print("Check in:",temp_last_check_in_time)
+                # print("Check out",last_entry.check_out_time)
+
+                t1 = last_entry.check_in_time
+                t2 = last_entry.check_out_time
+
+                t1_seconds = t1.hour * 3600 + t1.minute * 60 + t1.second
+                t2_seconds = t2.hour * 3600 + t2.minute * 60 + t2.second
+
+                difference_seconds = t2_seconds - t1_seconds
+
+                hours = difference_seconds // 3600
+                minutes = (difference_seconds % 3600) // 60
+                seconds = difference_seconds % 60
+
+
+                # last_entry.total_time = datetime.time(hour=hours, minute=minutes, second=seconds)
+                time_diff = datetime.time(hour=hours, minute=minutes, second=seconds)
+
+                last_entry.total_time = time_diff.strftime("%H:%M:%S")
+
+                # last_entry.total_time = last_entry.check_out_time - last_entry.check_in_time
+                print(last_entry.total_time)
                 last_entry.save()
+
+            # if last_entry:
+            #     last_entry.check_out_time = timezone.localtime(timezone.now())
+            #     last_entry.total_time = last_entry.check_out_time - last_entry.check_in_time
+            #     last_entry.save()
+
 
         return redirect('timesheet')
 
