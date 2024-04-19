@@ -88,26 +88,32 @@
 
         <button type="button" class="buttons" id="change-address-button">Change Address</button>
     </div>
+    <form method='post' action='/user'>
+        {% csrf_token %}
+        <div id="password-container" style="display: none;">
+            <div class="container">
+                <label for="currentPassword">Current Password:</label>
+                <input type="password" id="currentPassword" name="currentPassword" value="currentPassword" class="editable" placeholder="Enter current password">
+                <i class="far fa-eye-slash" id="toggleCurrentPassword" onclick="togglePasswordVisibility('currentPassword', 'toggleCurrentPassword')"></i>
+            </div>
 
-    <div id="password-container" style="display: none;">
-        <div class="container">
-            <label for="currentPassword">Current Password:</label>
-            <input type="password" id="currentPassword" class="editable" placeholder="Enter current password">
-            <i class="far fa-eye-slash" id="toggleCurrentPassword" onclick="togglePasswordVisibility('currentPassword', 'toggleCurrentPassword')"></i>
-        </div>
+            <div class="container">
+                <label for="newPassword">New Password:</label>
+                <input type="password" id="newPassword" name="newPassword" value="newPassword" class="editable" placeholder="Enter new password">
+                <i class="far fa-eye-slash" id="toggleNewPassword" onclick="togglePasswordVisibility('newPassword', 'toggleNewPassword')"></i>
+            </div>
 
-        <div class="container">
-            <label for="newPassword">New Password:</label>
-            <input type="password" id="newPassword" class="editable" placeholder="Enter new password">
-            <i class="far fa-eye-slash" id="toggleNewPassword" onclick="togglePasswordVisibility('newPassword', 'toggleNewPassword')"></i>
+            <div class="container">
+                <label for="confirmPassword">Confirm new Password:</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" value="confirmPassword" class="editable" placeholder="Enter new password again">
+                <i class="far fa-eye-slash" id="toggleConfirmPassword" onclick="togglePasswordVisibility('confirmPassword', 'toggleConfirmPassword')"></i>
+            </div>
+        
+            <div class="container">
+                <button type="button" class="buttons" id="save-changes-button">Save Changes</button>
+            </div>
         </div>
-
-        <div class="container">
-            <label for="confirmPassword">Confirm new Password:</label>
-            <input type="password" id="confirmPassword" class="editable" placeholder="Enter new password again">
-            <i class="far fa-eye-slash" id="toggleConfirmPassword" onclick="togglePasswordVisibility('confirmPassword', 'toggleConfirmPassword')"></i>
-        </div>
-    </div>
+    </form>
 
     <div id="address-container" style="display: none;">
         <div class="container">
@@ -135,9 +141,7 @@
         </div>
     </div>
 
-    <div class="container">
-        <button type="button" class="buttons" onclick="saveChanges()" id="save-changes-button">Save Changes</button>
-    </div>
+    
 
 </form>
 {% endblock section %}

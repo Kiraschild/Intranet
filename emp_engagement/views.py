@@ -57,7 +57,7 @@ def login_user(request):
                 print(profile_pic_url)
                 messages.success(request,"Successfully logged in!")
                 print("User logged in",user)
-                return render(request,'index.html',{'display_name': display_name, 'quali':quali, 'profile_pic_url':profile_pic_url})
+                return render(request,'index.html',{'display_name': display_name, 'position':user.Position, 'profile_pic_url':profile_pic_url})
             else :
                 messages.error(request,"Check Credentials")
                 return render(request,'login.html')
@@ -170,16 +170,16 @@ def index(request):
 @login_access_only
 def home(request): 
     display_name= request.session.get('display_name')
-    quali = request.session.get('quali')
+    position = request.session.get('position')
     profile_pic_url = request.session.get('profile_pic_url')
-    return render(request,'home.html',{'display_name': display_name, 'quali':quali, 'profile_pic_url':profile_pic_url})
+    return render(request,'home.html',{'display_name': display_name, 'position':position, 'profile_pic_url':profile_pic_url})
 
 @login_access_only
 def dashboard(request): 
     display_name= request.session.get('display_name')
-    quali = request.session.get('quali')
+    position = request.session.get('position')
     profile_pic_url = request.session.get('profile_pic_url')
-    return render(request,'dashboard.html',{'display_name': display_name, 'quali':quali, 'profile_pic_url':profile_pic_url})
+    return render(request,'dashboard.html',{'display_name': display_name, 'position':position, 'profile_pic_url':profile_pic_url})
     
 
 @login_access_only
@@ -214,7 +214,7 @@ def user(request):
 def event(request): 
     currentUser = request.session.get('username')
     display_name= request.session.get('display_name')
-    quali = request.session.get('quali')
+    position = request.session.get('position')
     profile_pic_url = request.session.get('profile_pic_url')
 
     if request.method == 'POST':
@@ -242,20 +242,20 @@ def event(request):
     else:
         # events = Event.objects.filter(username=currentUser)
         events = Event.objects.all()
-        return render(request,'event.html',{'display_name': display_name, 'quali':quali, 'profile_pic_url':profile_pic_url, 'events': events})
+        return render(request,'event.html',{'display_name': display_name, 'position':position, 'profile_pic_url':profile_pic_url, 'events': events})
 
 
 @login_access_only
 def task(request): 
     display_name= request.session.get('display_name')
-    quali = request.session.get('quali')
+    position = request.session.get('position')
     profile_pic_url = request.session.get('profile_pic_url')
-    return render(request,'task.html',{'display_name': display_name, 'quali':quali, 'profile_pic_url':profile_pic_url})
+    return render(request,'task.html',{'display_name': display_name, 'position':position, 'profile_pic_url':profile_pic_url})
 
 @login_access_only
 def timesheet(request):
     display_name= request.session.get('display_name')
-    quali = request.session.get('quali')
+    position = request.session.get('position')
     profile_pic_url = request.session.get('profile_pic_url') 
     if request.method == 'POST':
         username = request.session.get('username')  # Retrieve username from session
@@ -264,7 +264,7 @@ def timesheet(request):
             TimeSheetData.objects.create(username=username, check_in_time=timezone.now())
         elif 'check_out' in request.POST:
             # Handle logout action
-            last_entry = TimeSheetData.objects.filter(username=username).order_by('-date').first()
+            last_entry = TimeSheetData.objects.filter(username=username).order_by('-date').last()
             if last_entry:
                 last_entry.check_out_time = timezone.now()
                 last_entry.total_time = last_entry.check_out_time - last_entry.check_in_time
@@ -274,11 +274,11 @@ def timesheet(request):
 
     timesheet_data = TimeSheetData.objects.filter(username=request.session.get('username'))
       
-    return render(request,'timesheet.html',{'display_name': display_name, 'quali':quali, 'profile_pic_url':profile_pic_url,'timesheet_data': timesheet_data})
+    return render(request,'timesheet.html',{'display_name': display_name, 'position':position, 'profile_pic_url':profile_pic_url,'timesheet_data': timesheet_data})
 
 @login_access_only
 def leave(request): 
     display_name= request.session.get('display_name')
-    quali = request.session.get('quali')
+    position = request.session.get('position')
     profile_pic_url = request.session.get('profile_pic_url')
-    return render(request,'leave.html',{'display_name': display_name, 'quali':quali, 'profile_pic_url':profile_pic_url})
+    return render(request,'leave.html',{'display_name': display_name, 'position':position, 'profile_pic_url':profile_pic_url})
