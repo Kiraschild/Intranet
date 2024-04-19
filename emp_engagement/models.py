@@ -40,3 +40,25 @@ class user_data(models.Model):
     
     def __str__(self):
         return self.Username
+
+
+class Event(models.Model):
+    eventid = models.CharField(max_length=6)
+    username = models.CharField(max_length=30)
+    title = models.CharField(max_length=255)
+    start = models.DateTimeField()
+    end = models.DateTimeField()
+    details = models.TextField()
+
+    def _str_(self):
+        return self.title
+
+class TimeSheetData(models.Model):
+    username = models.CharField(max_length=30)
+    date = models.DateField(auto_now_add=True)
+    check_in_time = models.DateTimeField(null=True, blank=True)
+    check_out_time = models.DateTimeField(null=True, blank=True)
+    total_time = models.DurationField(null=True, blank=True)
+
+    def _str_(self):
+        return self.username

@@ -1,5 +1,6 @@
-from emp_engagement.models import user_credentials, user_data
-
+from django.utils import timezone
+import uuid
+from emp_engagement.models import user_credentials, user_data, Event, TimeSheetData
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -211,10 +212,38 @@ def user(request):
 
 @login_access_only
 def event(request): 
+    currentUser = request.session.get('username')
     display_name= request.session.get('display_name')
     quali = request.session.get('quali')
     profile_pic_url = request.session.get('profile_pic_url')
-    return render(request,'event.html',{'display_name': display_name, 'quali':quali, 'profile_pic_url':profile_pic_url})
+
+    if request.method == 'POST':
+        current_user = currentUser
+        event_id = str(uuid.uuid4())[:6]
+        title = request.POST.get('event-title')
+        start = request.POST.get('event-start')
+        end = request.POST.get('event-end')
+        details = request.POST.get('event-details')
+
+
+        # Create the event associated with the logged-in user
+        event = Event.objects.create(
+            eventid=event_id,
+            username=current_user,
+            title=title,
+            start=start,
+            end=end,
+            details=details
+        )
+        event.save()
+
+        return redirect('event')
+
+    else:
+        # events = Event.objects.filter(username=currentUser)
+        events = Event.objects.all()
+        return render(request,'event.html',{'display_name': display_name, 'quali':quali, 'profile_pic_url':profile_pic_url, 'events': events})
+
 
 @login_access_only
 def task(request): 
@@ -224,11 +253,28 @@ def task(request):
     return render(request,'task.html',{'display_name': display_name, 'quali':quali, 'profile_pic_url':profile_pic_url})
 
 @login_access_only
-def timesheet(request): 
+def timesheet(request):
     display_name= request.session.get('display_name')
     quali = request.session.get('quali')
-    profile_pic_url = request.session.get('profile_pic_url')
-    return render(request,'timesheet.html',{'display_name': display_name, 'quali':quali, 'profile_pic_url':profile_pic_url})
+    profile_pic_url = request.session.get('profile_pic_url') 
+    if request.method == 'POST':
+        username = request.session.get('username')  # Retrieve username from session
+        if 'check_in' in request.POST:
+            # Handle login action
+            TimeSheetData.objects.create(username=username, check_in_time=timezone.now())
+        elif 'check_out' in request.POST:
+            # Handle logout action
+            last_entry = TimeSheetData.objects.filter(username=username).order_by('-date').first()
+            if last_entry:
+                last_entry.check_out_time = timezone.now()
+                last_entry.total_time = last_entry.check_out_time - last_entry.check_in_time
+                last_entry.save()
+
+        return redirect('timesheet')
+
+    timesheet_data = TimeSheetData.objects.filter(username=request.session.get('username'))
+      
+    return render(request,'timesheet.html',{'display_name': display_name, 'quali':quali, 'profile_pic_url':profile_pic_url,'timesheet_data': timesheet_data})
 
 @login_access_only
 def leave(request): 

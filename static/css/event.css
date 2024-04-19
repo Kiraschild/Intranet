@@ -1,0 +1,230 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+:root {
+  --primary-color: #4747a1;
+  --secondary-color: #f4f7fe;
+}
+
+.fc-left h2 {
+  color: var(--primary-color);
+}
+
+.fa {
+  display: inline-block !important;
+  margin-right: 0.5em;
+}
+
+.fc-content {
+  float: left;
+}
+
+.fc-center {
+  color: var(--primary-color);
+}
+
+.I_edit,
+.I_delete {
+  padding: 8px;
+  cursor: pointer;
+  font-size: .8em;
+}
+
+.fc-time {
+  padding-left: 20px;
+  padding-right: 3px;
+  font-size: large;
+}
+
+body {
+  background-color: var(--secondary-color);
+}
+
+.fc-day-header {
+  color: var(--primary-color);
+}
+
+.fc-row .fc-content-skeleton td,
+.fc-row .fc-helper-skeleton td {
+  background: 0 0;
+  border-bottom: 0;
+}
+
+label {
+  padding: 0.2rem;
+}
+
+#calendar {
+  padding: 20px;
+  background-color: var(--secondary-color);
+  font-size: 0.7em;
+}
+
+.fc-day-grid-event .fc-content {
+  margin-bottom: 10px;
+}
+
+.modle {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  overflow: auto;
+  font-size: 17px;
+}
+
+.modle-continer {
+  background-color: var(--secondary-color);
+  margin: 8% auto;
+  width: calc(70% - 78px);
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.2), 0 7px 20px rgba(0, 0, 0, 0.2);
+  animation-name: modalopen;
+  animation-duration: 0.5s;
+}
+
+.modle-header {
+  background: var(--secondary-color);
+  color: var(--primary-color);
+  height: 50px;
+  padding: 5px;
+  text-align: center;
+}
+
+.modal-body {
+  color: var(--primary-color);
+}
+
+.modle-footer {
+  background: var(--secondary-color);
+  text-align: center;
+  height: 70px;
+}
+
+@keyframes modalopen {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.vertical-date {
+  list-style: none;
+  padding: 1em;
+  text-align: left;
+  border-bottom: 2px solid #000;
+}
+
+.list-daynumber {
+  line-height: 0.5em;
+  font-size: 46px;
+  font-weight: 800;
+  opacity: 0.9;
+}
+
+.list-monthname {
+  font-size: 32px;
+  opacity: 0.6;
+  border-bottom: 5px solid #ff4d55;
+  width: 59px;
+}
+
+.duration {
+  display: block;
+  color: #908383;
+  font-weight: 600;
+  margin-top: 0.8em;
+}
+
+.s_title {
+  color: var(--primary-color);
+  font-size: 1.3em;
+  margin: -13px 34px;
+  position: absolute;
+  font-weight: 900;
+}
+
+.s_des {
+  font-size: 16px;
+  font-style: italic;
+}
+
+.fc-scroller::-webkit-scrollbar {
+  display: none;
+}
+
+.submitButton, .cancelButton, .deleteButton {
+  height: auto;
+  width:auto;
+  padding: 5px;
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  border-radius: 10px;
+  border: 0px;
+  font-weight: 200;
+  padding: 10px;
+  margin: 10px;
+}
+
+.submitButton:hover, .cancelButton:hover, .deleteButton:hover {
+  cursor: pointer;
+  font-weight: 400;
+}
+
+.fc-event {
+  padding: 5px;
+  background-color: var(--primary-color) !important;
+  height: auto !important;
+  /* 
+  font-size: 12px; 
+  line-height: 1.2;  */
+  /* white-space: normal;  */
+}
+
+.fc-event .fc-bg {
+  z-index: 1 !important;
+  /* background: #fff; */
+  opacity: .25 !important;
+}
+
+/*
+.fc-time {
+  font-size: 15px;
+  font-weight: normal;
+}*/
+
+.fc-content {
+  display: flex;
+  align-items: center;
+}
+
+.fc-content *:not(.fc-title) {
+  display: none;
+}
+/*
+.fc-bg {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+} */
+
+.fc-event-container {
+  background-color: var(--primary-color);
+  /* color: var(--secondary-color); */
+}
+
+/* .fc-unthemed td.fc-today {
+  background-color: #4747a1;
+  color: #f4f7fe;
+} */

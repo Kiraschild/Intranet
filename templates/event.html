@@ -1,0 +1,159 @@
+{% extends "index.html" %}
+
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static "css/event.css" %}">
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css'>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta.2/css/bootstrap.css'>
+<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+{% endblock css %}
+
+{% block section %}
+
+<div id='calendar'></div>
+
+<div class='modle' id='add-modal'>
+    <div class='modle-continer'>
+        <form method="post" id="event-form" action="/event">
+            {% csrf_token %}
+            <div class='modle-header'>
+                <h2>Add Event</h2>
+            </div>
+            <div class='modal-body'>
+                <input type='hidden' name='username' value='{{ request.session.username }}'>
+                <label for='event-title'>Event Name</label>
+                <input type='text' name='event-title' id='event-title' class='form-control'
+                    placeholder='Enter the event title'>
+                <label for="event-start">From</label>
+                <input id="event-start" type="datetime-local" name="event-start" class='form-control' />
+                <label for="event-end">To</label>
+                <input id="event-end" type="datetime-local" name="event-end" class='form-control' />
+                <label for="event-details">Details</label>
+                <textarea id="event-details" type='text' name="event-details" class='form-control'
+                    placeholder='Enter the details of the event'></textarea>
+            </div>
+            <div class='modle-footer'>
+                <button type="submit" class="submitButton">Save</button>
+                <button type="button" class="cancelButton">Cancel</button>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<div class='modle' id='edit-modal'>
+    <div class='modle-continer'>
+        <form method="post" id="edit-form" action="/event">
+            {% csrf_token %}
+            <div class='modle-header'>
+                <h2>Edit Event</h2>
+            </div>
+            <div class='modal-body'>
+                <input type='hidden' name='username' value='{{ request.session.username }}'>
+                <label for='event-title'>Event Name</label>
+                <input type='text' name='event-title' id='event-title' class='form-control'>
+                <label for="event-start">From</label>
+                <input id="event-start" type="datetime-local" name="event-start" class='form-control' />
+                <label for="event-end">To</label>
+                <input id="event-end" type="datetime-local" name="event-end" class='form-control' />
+                <label for="event-details">Details</label>
+                <textarea id="event-details" type='text' name="event-details" class='form-control'></textarea>
+            </div>
+            <div class='modle-footer'>
+                <!-- <button type="button" class="btn btn-success submitButton">Save</button>
+                    <button type="button" class="btn btn-danger deleteButton">Delete</button>
+                    <button type="button" class="btn btn-primary cancelButton">Cancel</button> -->
+
+                <button type="button" class="submitButton">Save</button>
+                <button type="button" class="deleteButton">Delete</button>
+                <button type="button" class="cancelButton">Cancel</button>
+
+            </div>
+        </form>
+    </div>
+
+</div>
+
+{% endblock section %}
+
+{% block script %}
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+{% comment %} {% load static %} {% endcomment %}
+{% comment %}
+<script src="{% static " js/event.js" %}"></script> {% endcomment %}
+<script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.0/moment.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.2.0/fullcalendar.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>
+<script>
+    $(document).ready(function() {
+        $('#calendar').fullCalendar({
+            // Configure FullCalendar options here
+            header: {
+                left: 'month, agendaWeek, agendaDay',
+                center: 'title',
+                right: 'prev, today, next'
+            },
+            buttonText: {
+                today: 'Today',
+                month: 'Month',
+                week: 'Week',
+                day: 'Day'
+            },
+            timezone: 'local',
+            defaultView: 'month',
+            allDayDefault: false,
+            allDaySlot: false,
+            slotEventOverlap: true,
+            slotDuration: "00:30:00",
+            slotLabelInterval: "00:30:00",
+            snapDuration: "00:30:00",
+            contentHeight: 600,
+            scrollTime: "8:00:00",
+            axisFormat: 'h:mm a',
+            timeFormat: 'h:mm A()',
+            minTime: "09:00:00",
+            maxTime: "19:30:00",
+            selectable: true,
+            selectHelper: true,
+            events: [
+                // Iterate over the events data fetched from the database
+                {% for event in events %}
+                {
+                title: '{{ event.title|escapejs|safe }}',
+                start: '{{ event.start|date:"Y-m-d H:i" }}',  // Format the start date
+                end: '{{ event.end|date:"Y-m-d H:i" }}',      // Format the end date
+                description: '{{ event.details|escapejs|safe}}',
+                // Additional event properties can be added here
+                },
+                {% endfor %}
+            ],
+            textColor: "#f4f7fe",
+            backgroundColor: "#4747a1",
+            select: function() {
+                // $('#simplemodal h2').text('Add Event');
+                $('#add-modal').show();
+            },
+            eventClick: function(event) {
+                // Open the edit event form with the event details pre-filled
+                $('#event-title').val(event.title);
+                $('#event-start').val(event.start.format('YYYY-MM-DDTHH:mm'));
+                $('#event-end').val(event.end.format('YYYY-MM-DDTHH:mm'));
+                $('#event-details').val(event.description); // Assuming description holds event details
+                console.log(event.title);
+                console.log(event.start.format('YYYY-MM-DDTHH:mm'));
+                console.log(event.end.format('YYYY-MM-DDTHH:mm'));
+                console.log(event.description);
+                $('#edit-modal').show();
+            },
+        });
+
+        $('.cancelButton').click(function(e) {
+            e.preventDefault();
+            $('#add-modal').hide();
+            $('#edit-modal').hide();
+          });
+    });
+</script>
+{% endblock script %}
