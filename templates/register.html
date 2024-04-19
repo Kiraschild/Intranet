@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Register</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
@@ -13,67 +13,106 @@
     <link rel="stylesheet" href="{% static "css/register.css" %}">
 </head>
 
+
 <body>
-    <form method="post" action="/register" enctype="multipart/form-data">
+
+    <form method="post" action="/register" enctype="multipart/form-data" >
         {% csrf_token %}
-        <h1>Techsture Technologies</h1>
-        <div class="container-fluid px-1 py-5 mx-auto">
-            <div class="row d-flex justify-content-center">
-                <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
-                    
-                        <h5 class="text-center mb-4">Powering world-class companies</h5>
-                        <div class="row justify-content-between text-left">
-                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Username<span class="text-danger"> *</span></label> <input type="text" id="username" name="username" placeholder="Enter your username" onblur="validate(1)"> </div>
-                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Password<span class="text-danger"> *</span></label> <input type="text" id="password" name="password" placeholder="Enter your password(default: admin123)" onblur="validate(1)"> </div>
-                            <div class="row justify-content-between text-left">
-                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">First name<span class="text-danger"> *</span></label> <input type="text" id="fname" name="fname" placeholder="Enter your first name" onblur="validate(1)"> </div>
-                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Middle name<span class="text-danger"> *</span></label> <input type="text" id="fname" name="mname" placeholder="Enter your middle name" onblur="validate(1)"> </div>
-                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div>
-                            </div>
-                            <div class="row justify-content-between text-left">
-                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Address Line 1:<span class="text-danger"> *</span></label> <input type="text" id="address1" name="address1" placeholder="Enter Address Line 1:" onblur="validate(1)"> </div>
-                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Address Line 1:<span class="text-danger"> *</span></label> <input type="text" id="address2" name="address2" placeholder="Enter Address Line 2:" onblur="validate(1)"> </div>
-                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">City<span class="text-danger"> *</span></label> <input type="text" id="city" name="city" placeholder="Enter city" onblur="validate(1)"> </div>
-                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">State<span class="text-danger"> *</span></label> <input type="text" id="state" name="state" placeholder="Enter state" onblur="validate(2)"> </div>
-                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Pincode<span class="text-danger"> *</span></label> <input type="text" id="pincode" name="pincode" placeholder="Enter pincode" onblur="validate(1)"> </div>
-                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Country<span class="text-danger"> *</span></label> <input type="text" id="country" name="country" placeholder="Enter country" onblur="validate(1)"> </div>
-                            </div>
-                            
-                            <div class="row justify-content-between text-left">
-                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Date of Birth<span class="text-danger">*</span></label> <input type="date" id="dob" name="dob" placeholder="" onblur="validate(3)"> </div>
-                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Gender<span class="text-danger"> *</span></label><br>
-                                    <input type="radio" id="male" name="gender" value="M" required>
-                                    <label for="male">Male</label><br>
-                                    <input type="radio" id="female" name="gender" value="F">
-                                    <label for="female">Female</label><br>
-                                    <input type="radio" id="other" name="gender" value="O">
-                                    <label for="other">Other</label><br><br> </div>
-                            </div>
-
-                            <div class="row justify-content-between text-left">
-                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Qualification<span class="text-danger"> *</span></label> <input type="text" id="qualification" name="qualification" placeholder="Enter Qualification" onblur="validate(1)"> </div>
-                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Position<span class="text-danger"> *</span></label> <input type="text" id="position" name="position" placeholder="Enter job title" onblur="validate(1)"> </div>
-                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Department<span class="text-danger"> *</span></label> <input type="text" id="department" name="department" placeholder="Enter department" onblur="validate(2)"> </div>
-                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Reports To<span class="text-danger"> *</span></label> <input type="text" id="reportsto" name="reportsto" placeholder="Enter name of mentor" onblur="validate(1)"> </div>
-                            </div>
-                            
-                            <div class="row justify-content-between text-left">
-                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Email<span class="text-danger">*</span></label> <input type="text" id="email" name="email" placeholder="" onblur="validate(3)"> </div>
-                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Phone number<span class="text-danger"> *</span></label> <input type="text" id="phno" name="phno" placeholder="" onblur="validate(4)"> </div>
-                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3"><label for="profilepic">Profile Picture:</label><input type="file" id="profilepic" name="profilepic"><br><br>
-                            </div>
-
-                    
-                            <div class="row justify-content-end">
-                                <div class="form-group col-sm-6"> <button type="submit" class="btn-block btn-primary">Register</button> </div>
-                            </div>
-                            
-                       
-                    </div>
-                </div>
+        <h1>   Techsture Technologies</h1>
+            <div id="profile-container">
+                <img id="profile-picture" src="{{ profile_pic_url }}" alt="Profile Picture">
             </div>
-        </div>
-    </form>
+            <div id="profile-container">
+                <label for="file-input" class="buttons">Upload Picture</label>
+                <input type="file" name="profilepic" id="profilepic">
+                
+            </div>
+            <div class="container">
+                <label for="fname">First Name<span class="required">*</span></label>
+                <input type="text" id="fname" name="fname" class="editable" placeholder="Enter your first name">
+        
+                <label for="mname">Middle Name<span class="required">*</span></label>
+                <input type="text" id="mname" name="mname" class="editable" placeholder="Enter your middle name">
+        
+                <label for="lname">Last Name<span class="required">*</span></label>
+                <input type="text" id="lname" name="lname" class="editable" placeholder="Enter your last name">
+            </div>
+        
+            <div class="container">
+                <label for="username">Username<span class="required">*</span></label>
+                <input type="text" id="username" name="username" class="editable" placeholder="Enter your username">
+        
+                <label for="email">Email<span class="required">*</span></label>
+                <input type="text" id="email" name="email" class="editable" placeholder="Enter your email">
+
+                <label for="phno">Phone Number<span class="required">*</span></label>
+                <input type="text" id="phno" name="phno" class="editable" placeholder="Enter your phone number">
+            </div>
+            
+            <div class="container">
+                <label for="password">Password</label>
+                <input type="text" id="password" name="password" class="editable" placeholder="Enter password(default:admin123)">
+        
+                <label for="dob">Date of birth<span class="required">*</span></label>
+                <input type="date" id="dob" name="dob" class="editable">
+            </div>
+     
+        
+            <div class="container">
+                <label for="address_line_1">Address Line 1<span class="required">*</span></label>
+                <input type="text" id="address1" name="address1" class="editable" placeholder="Enter permanent address">
+        
+                <label for="address_line_2">Address Line 2:</label>
+                <input type="text" id="address2" name="address2" class="editable" placeholder="Enter permanent address">
+            </div>
+        
+            <div class="container">
+                <label for="city">City<span class="required">*</span></label>
+                <input type="text" id="city" name="city" class="editable" placeholder="Enter city">
+        
+                <label for="pincode">Pincode<span class="required">*</span></label>
+                <input type="text" id="pincode" name="pincode" class="editable" placeholder="Enter pincode">
+            </div>
+        
+            <div class="container">
+                <label for="state">State<span class="required">*</span></label>
+                <input type="text" id="state" name="state" class="editable" placeholder="Enter state">
+        
+                <label for="country">Country<span class="required">*</span></label>
+                <input type="text" id="country" name="country" class="editable" placeholder="Enter country">
+            </div>
+        
+            <div class="container">
+                <label>Gender<span class="required">*</span></label>
+                <input type="radio" id="male" name="gender" value="M" required>
+                <label for="male">Male</label>
+                <input type="radio" id="female" name="gender" value="F">
+                <label for="female">Female</label>
+                <input type="radio" id="other" name="gender" value="O">
+                <label for="other">Other</label>
+            </div>
+        
+            <div class="container">
+                <label for="qualification">Qualifications<span class="required">*</span></label>
+                <input type="text" id="qualification" name="qualification" class="editable" placeholder="Enter Qualification">
+        
+                <label for="position">Position<span class="required">*</span></label>
+                <input type="text" id="position" name="position" class="editable" placeholder="Enter job title">
+            </div>
+        
+            <div class="container">
+                <label for="department">Department<span class="required">*</span></label>
+                <input type="text" id="department" name="department" class="editable" placeholder="Enter department">
+        
+                <label for="reporting">Reports To<span class="required">*</span></label>
+                <input type="text" id="reporting" name="reportsto" class="editable" placeholder="Enter name of mentor">
+            </div>
+        
+            <div class="container">
+                <button type="submit" class="buttons"  id="save-changes-button">Register</button>
+            </div>
+        
+        </form>
     <script src="{% static "js/register.js" %}"></script>
     {% block script %}{% endblock script %}
 </body>
