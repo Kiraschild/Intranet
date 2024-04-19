@@ -184,6 +184,7 @@ def dashboard(request):
 
 @login_access_only
 def user(request): 
+    
     context = {
         'username': request.session.get('username'),
         'password': request.session.get('password'),
@@ -207,7 +208,99 @@ def user(request):
         'profile_pic_url': request.session.get('profile_pic_url'),
         'display_name':request.session.get('display_name')
     }
-    
+    if request.method =="POST":
+        if 'passwordChange' in request.POST:
+            currentUser = request.session.get('username')
+            password = request.session.get('password')
+            currentPassword = request.POST.get("currentPassword")
+            newPassword= request.POST.get("newPassword")
+            confirmPassword = request.POST.get("confirmPassword")
+            if password == currentPassword:
+                if newPassword != currentPassword:
+                    if newPassword == confirmPassword:
+                        print("Successfull")
+                        user= user_data.objects.get(Username=currentUser)
+                        user.Password = newPassword
+                        user.save()
+                        #user.user_data.save()
+                        request.session['password'] = newPassword
+                        context = {
+                        'username': request.session.get('username'),
+                        'password': request.session.get('password'),
+                        'firstname': request.session.get('firstname'),
+                        'middlename': request.session.get('middlename'),
+                        'lastname': request.session.get('lastname'),
+                        'address1': request.session.get('address1'),
+                        'address2': request.session.get('address2'),
+                        'city': request.session.get('city'),
+                        'state': request.session.get('state'),
+                        'pincode': request.session.get('pincode'),
+                        'country': request.session.get('country'),
+                        #'dob': request.session.get('dob'),
+                        'gender': request.session.get('gender'),
+                        'quali': request.session.get('quali'),
+                        'position': request.session.get('position'),
+                        'department': request.session.get('department'),
+                        'reports': request.session.get('reports'),
+                        'email': request.session.get('email'),
+                        'phone_number': request.session.get('phone_number'),
+                        'profile_pic_url': request.session.get('profile_pic_url'),
+                        'display_name':request.session.get('display_name')
+                        }
+                        return render(request, 'user.html', context)    
+                    else:
+                        print("passwords dont match")
+                else:
+                    print("password is same as previous password")
+            else:
+                print("current password does not match")    
+        
+        if 'addressChange' in request.POST:
+            currentUser = request.session.get('username')
+            newAddress1 = request.POST.get('new_address_line_1')
+            newAddress2 = request.POST.get('new_address_line_2')
+            newCity = request.POST.get('new_city')
+            newPincode = request.POST.get('new_pincode')
+            newState = request.POST.get('new_state')
+            newCountry = request.POST.get('new_country')
+            user= user_data.objects.get(Username=currentUser)
+            user.Address1 = newAddress1
+            user.Address2 = newAddress2
+            user.City= newCity
+            user.Pincode= newPincode
+            user.State= newState
+            user.Country= newCountry
+            user.save()
+            request.session['address1']= newAddress1
+            request.session['address2']= newAddress2
+            request.session['city']= newCity
+            request.session['pincode']= newPincode
+            request.session['state']= newState
+            request.session['country']= newCountry
+            context = {
+            'username': request.session.get('username'),
+            'password': request.session.get('password'),
+            'firstname': request.session.get('firstname'),
+            'middlename': request.session.get('middlename'),
+            'lastname': request.session.get('lastname'),
+            'address1': request.session.get('address1'),
+            'address2': request.session.get('address2'),
+            'city': request.session.get('city'),
+            'state': request.session.get('state'),
+            'pincode': request.session.get('pincode'),
+            'country': request.session.get('country'),
+            #'dob': request.session.get('dob'),
+            'gender': request.session.get('gender'),
+            'quali': request.session.get('quali'),
+            'position': request.session.get('position'),
+            'department': request.session.get('department'),
+            'reports': request.session.get('reports'),
+            'email': request.session.get('email'),
+            'phone_number': request.session.get('phone_number'),
+            'profile_pic_url': request.session.get('profile_pic_url'),
+            'display_name':request.session.get('display_name')
+            }
+            return render(request,'user.html',context)
     return render(request,'user.html',context)
 
 @login_access_only

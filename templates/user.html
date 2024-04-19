@@ -88,62 +88,70 @@
 
         <button type="button" class="buttons" id="change-address-button">Change Address</button>
     </div>
-    <form method='post' action='/user'>
-        {% csrf_token %}
-        <div id="password-container" style="display: none;">
-            <div class="container">
-                <label for="currentPassword">Current Password:</label>
-                <input type="password" id="currentPassword" name="currentPassword" value="currentPassword" class="editable" placeholder="Enter current password">
-                <i class="far fa-eye-slash" id="toggleCurrentPassword" onclick="togglePasswordVisibility('currentPassword', 'toggleCurrentPassword')"></i>
-            </div>
-
-            <div class="container">
-                <label for="newPassword">New Password:</label>
-                <input type="password" id="newPassword" name="newPassword" value="newPassword" class="editable" placeholder="Enter new password">
-                <i class="far fa-eye-slash" id="toggleNewPassword" onclick="togglePasswordVisibility('newPassword', 'toggleNewPassword')"></i>
-            </div>
-
-            <div class="container">
-                <label for="confirmPassword">Confirm new Password:</label>
-                <input type="password" id="confirmPassword" name="confirmPassword" value="confirmPassword" class="editable" placeholder="Enter new password again">
-                <i class="far fa-eye-slash" id="toggleConfirmPassword" onclick="togglePasswordVisibility('confirmPassword', 'toggleConfirmPassword')"></i>
-            </div>
-        
-            <div class="container">
-                <button type="button" class="buttons" id="save-changes-button">Save Changes</button>
-            </div>
+</form>
+<form method="post" action="/user">  
+    {% csrf_token %}
+    <div id="password-container" style="display: none;">
+        <div class="container">
+            <label for="currentPassword">Current Password:</label>
+            <input type="password" id="currentPassword" name="currentPassword" value="currentPassword" class="editable" placeholder="Enter current password">
+            <i class="far fa-eye-slash" id="toggleCurrentPassword" onclick="togglePasswordVisibility('currentPassword', 'toggleCurrentPassword')"></i>
         </div>
-    </form>
 
+        <div class="container">
+            <label for="newPassword">New Password:</label>
+            <input type="password" id="newPassword" name="newPassword" value="newPassword" class="editable" placeholder="Enter new password">
+            <i class="far fa-eye-slash" id="toggleNewPassword" onclick="togglePasswordVisibility('newPassword', 'toggleNewPassword')"></i>
+        </div>
+
+        <div class="container">
+            <label for="confirmPassword">Confirm new Password:</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" value="confirmPassword" class="editable" placeholder="Enter new password again">
+            <i class="far fa-eye-slash" id="toggleConfirmPassword" onclick="togglePasswordVisibility('confirmPassword', 'toggleConfirmPassword')"></i>
+        </div>
+        
+        <div class="container">
+            <button type="submit" class="buttons" name="passwordChange" id="save-changes-button">Save Changes</button>
+        </div>
+    </div>
+</form>
+
+<form method="post" action='/user'>
+    {% csrf_token %}
     <div id="address-container" style="display: none;">
         <div class="container">
             <label for="new_address_line_1">Address Line 1:</label>
-            <input type="text" id="new_address_line_1" class="editable" placeholder="Enter address line 1">
+            <input type="text" name="new_address_line_1" value="new_address_line_1" id="new_address_line_1" class="editable" placeholder="Enter address line 1">
 
             <label for="new_address_line_2">Address Line 2:</label>
-            <input type="text" id="new_address_line_2" class="editable" placeholder="Enter address line 2">
+            <input type="text" name="new_address_line_2" value="new_address_line_2" id="new_address_line_2" class="editable" placeholder="Enter address line 2">
         </div>
 
         <div class="container">
             <label for="new_city">City:</label>
-            <input type="text" id="new_city" class="editable" placeholder="Enter city">
+            <input type="text" name="new_city" value="new_city" id="new_city" class="editable" placeholder="Enter city">
 
             <label for="new_pincode">Pincode:</label>
-            <input type="text" id="new_pincode" class="editable" placeholder="Enter pincode">
+            <input type="text" name="new_pincode" value="new_pincode" id="new_pincode" class="editable" placeholder="Enter pincode">
         </div>
 
         <div class="container">
             <label for="new_state">State:</label>
-            <input type="text" id="new_state" class="editable" placeholder="Enter state">
+            <input type="text" name="new_state" value="new_state" id="new_state" class="editable" placeholder="Enter state">
 
             <label for="new_country">Country:</label>
-            <input type="text" id="new_country" class="editable" placeholder="Enter country">
+            <input type="text" name="new_country" value="new_country" id="new_country" class="editable" placeholder="Enter country">
         </div>
+
+        <div class="container">
+            <button type="submit" class="buttons" name="addressChange"id="save-changes-button">Save Changes</button>
+        </div>
+
     </div>
 
-    
-
 </form>
+
+
 {% endblock section %}
 
 {% block script %}
