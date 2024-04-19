@@ -28,6 +28,9 @@ def login_user(request):
                 display_name= user.FirstName + " " + user.LastName
                 quali= user.Qualifications
                 profile_pic_url= user.Profilepic.url
+                request.session['display_name']= display_name
+                request.session['quali']=quali
+                request.session['profile_pic_url']=profile_pic_url
                 print(profile_pic_url)
                 messages.success(request,"Successfully logged in!")
                 print("User logged in",user)
@@ -112,32 +115,58 @@ def logout_user(request):
 
 @login_access_only
 def index(request): 
-    return render(request,'index.html')
+    #user= user_data.objects.get(Username=request.session.Username)
+    display_name= request.session.get('display_name')
+    quali = request.session.get('quali')
+    profile_pic_url = request.session.get('profile_pic_url')
+    return render(request,'index.html',{'display_name': display_name, 'quali':quali, 'profile_pic_url':profile_pic_url})
 
 @login_access_only
 def home(request): 
-    return render(request, 'home.html')
+    display_name= request.session.get('display_name')
+    quali = request.session.get('quali')
+    profile_pic_url = request.session.get('profile_pic_url')
+    return render(request,'home.html',{'display_name': display_name, 'quali':quali, 'profile_pic_url':profile_pic_url})
 
 @login_access_only
 def dashboard(request): 
-    return render(request, 'dashboard.html')
+    display_name= request.session.get('display_name')
+    quali = request.session.get('quali')
+    profile_pic_url = request.session.get('profile_pic_url')
+    return render(request,'dashboard.html',{'display_name': display_name, 'quali':quali, 'profile_pic_url':profile_pic_url})
+    
 
 @login_access_only
 def user(request): 
-    return render(request, 'user.html')
+    display_name= request.session.get('display_name')
+    quali = request.session.get('quali')
+    profile_pic_url = request.session.get('profile_pic_url')
+    return render(request,'user.html',{'display_name': display_name, 'quali':quali, 'profile_pic_url':profile_pic_url})
 
 @login_access_only
 def event(request): 
-    return render(request, 'event_calendar.html')
+    display_name= request.session.get('display_name')
+    quali = request.session.get('quali')
+    profile_pic_url = request.session.get('profile_pic_url')
+    return render(request,'event.html',{'display_name': display_name, 'quali':quali, 'profile_pic_url':profile_pic_url})
 
 @login_access_only
 def task(request): 
-    return render(request, 'task.html')
+    display_name= request.session.get('display_name')
+    quali = request.session.get('quali')
+    profile_pic_url = request.session.get('profile_pic_url')
+    return render(request,'task.html',{'display_name': display_name, 'quali':quali, 'profile_pic_url':profile_pic_url})
 
 @login_access_only
 def timesheet(request): 
-    return render(request, 'timesheet.html')
+    display_name= request.session.get('display_name')
+    quali = request.session.get('quali')
+    profile_pic_url = request.session.get('profile_pic_url')
+    return render(request,'timesheet.html',{'display_name': display_name, 'quali':quali, 'profile_pic_url':profile_pic_url})
 
 @login_access_only
 def leave(request): 
-    return render(request, 'leave.html')
+    display_name= request.session.get('display_name')
+    quali = request.session.get('quali')
+    profile_pic_url = request.session.get('profile_pic_url')
+    return render(request,'leave.html',{'display_name': display_name, 'quali':quali, 'profile_pic_url':profile_pic_url})
