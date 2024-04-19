@@ -24,12 +24,34 @@ def login_user(request):
             print(user)
             print(user.is_user)
             if user.Password == password and user.is_user== True:
-                request.session['username'] = username
                 display_name= user.FirstName + " " + user.LastName
                 quali= user.Qualifications
                 profile_pic_url= user.Profilepic.url
+                request.session['username'] = username
+                request.session['password'] = password
+                request.session['firstname']= user.FirstName
+                request.session['middlename']= user.MiddleName
+                request.session['lastname']= user.LastName
                 request.session['display_name']= display_name
+                request.session['address1']= user.Address1
+                request.session['address2']= user.Address2
+                request.session['city']= user.City
+                request.session['state']= user.State
+                request.session['country']= user.Country
+                request.session['pincode']= user.Pincode
+                #request.session['dob']= user.DateofBirth
+                if user.Gender == 'M':
+                    request.session['gender']= "Male"
+                elif user.Gender == 'F':
+                    request.session['gender'] = "Female"
+                else:
+                    request.session['gender']= "Others"
                 request.session['quali']=quali
+                request.session['position']= user.Position
+                request.session['department']= user.Department
+                request.session['reports']= user.Reportsto
+                request.session['email']= user.Email
+                request.session['phone_number']= user.Phone_number
                 request.session['profile_pic_url']=profile_pic_url
                 print(profile_pic_url)
                 messages.success(request,"Successfully logged in!")
@@ -52,7 +74,8 @@ def register_user(request):
         firstname=request.POST.get('fname')
         middlename=request.POST.get('mname')
         lastname=request.POST.get('lname')
-        address=request.POST.get('address')
+        address1=request.POST.get('address1')
+        address2= request.POST.get('address2')
         city=request.POST.get('city')
         state=request.POST.get('state')
         pincode=request.POST.get('pincode')
@@ -85,7 +108,8 @@ def register_user(request):
             FirstName= firstname,
             MiddleName= middlename,
             LastName= lastname,
-            Address= address,
+            Address1= address1,
+            Address2= address2,
             City= city,
             State= state,
             Pincode= pincode,
@@ -116,10 +140,31 @@ def logout_user(request):
 @login_access_only
 def index(request): 
     #user= user_data.objects.get(Username=request.session.Username)
-    display_name= request.session.get('display_name')
-    quali = request.session.get('quali')
-    profile_pic_url = request.session.get('profile_pic_url')
-    return render(request,'index.html',{'display_name': display_name, 'quali':quali, 'profile_pic_url':profile_pic_url})
+    context = {
+        'username': request.session.get('username'),
+        'password': request.session.get('password'),
+        'firstname': request.session.get('firstname'),
+        'middlename': request.session.get('middlename'),
+        'lastname': request.session.get('lastname'),
+        'address1': request.session.get('address1'),
+        'address2': request.session.get('address2'),
+        'city': request.session.get('city'),
+        'state': request.session.get('state'),
+        'pincode': request.session.get('pincode'),
+        'country': request.session.get('country'),
+        #'dob': request.session.get('dob'),
+        'gender': request.session.get('gender'),
+        'quali': request.session.get('quali'),
+        'position': request.session.get('position'),
+        'department': request.session.get('department'),
+        'reports': request.session.get('reports'),
+        'email': request.session.get('email'),
+        'phone_number': request.session.get('phone_number'),
+        'profile_pic_url': request.session.get('profile_pic_url'),
+        'display_name':request.session.get('display_name')
+    }
+    print(request.session.get('reports'))
+    return render(request,'index.html',context)
 
 @login_access_only
 def home(request): 
@@ -138,10 +183,31 @@ def dashboard(request):
 
 @login_access_only
 def user(request): 
-    display_name= request.session.get('display_name')
-    quali = request.session.get('quali')
-    profile_pic_url = request.session.get('profile_pic_url')
-    return render(request,'user.html',{'display_name': display_name, 'quali':quali, 'profile_pic_url':profile_pic_url})
+    context = {
+        'username': request.session.get('username'),
+        'password': request.session.get('password'),
+        'firstname': request.session.get('firstname'),
+        'middlename': request.session.get('middlename'),
+        'lastname': request.session.get('lastname'),
+        'address1': request.session.get('address1'),
+        'address2': request.session.get('address2'),
+        'city': request.session.get('city'),
+        'state': request.session.get('state'),
+        'pincode': request.session.get('pincode'),
+        'country': request.session.get('country'),
+        #'dob': request.session.get('dob'),
+        'gender': request.session.get('gender'),
+        'quali': request.session.get('quali'),
+        'position': request.session.get('position'),
+        'department': request.session.get('department'),
+        'reports': request.session.get('reports'),
+        'email': request.session.get('email'),
+        'phone_number': request.session.get('phone_number'),
+        'profile_pic_url': request.session.get('profile_pic_url'),
+        'display_name':request.session.get('display_name')
+    }
+    
+    return render(request,'user.html',context)
 
 @login_access_only
 def event(request): 
