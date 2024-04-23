@@ -302,6 +302,44 @@ def user(request):
             'display_name':request.session.get('display_name')
             }
             return render(request,'user.html',context)
+        
+        if 'profilepicChange' in request.POST:
+            print("Hello")
+            currentUser= request.session.get('username')
+            newprofileurl= request.FILES.get('newprofilepic')
+            user= user_data.objects.get(Username= currentUser)
+            user.Profilepic= newprofileurl
+            print(newprofileurl)
+            user.save()
+            
+            user= user_data.objects.get(Username= currentUser)
+            newurl= user.Profilepic.url
+            print(newurl)
+            request.session['profile_pic_url']= newurl
+            context = {
+            'username': request.session.get('username'),
+            'password': request.session.get('password'),
+            'firstname': request.session.get('firstname'),
+            'middlename': request.session.get('middlename'),
+            'lastname': request.session.get('lastname'),
+            'address1': request.session.get('address1'),
+            'address2': request.session.get('address2'),
+            'city': request.session.get('city'),
+            'state': request.session.get('state'),
+            'pincode': request.session.get('pincode'),
+            'country': request.session.get('country'),
+            #'dob': request.session.get('dob'),
+            'gender': request.session.get('gender'),
+            'quali': request.session.get('quali'),
+            'position': request.session.get('position'),
+            'department': request.session.get('department'),
+            'reports': request.session.get('reports'),
+            'email': request.session.get('email'),
+            'phone_number': request.session.get('phone_number'),
+            'profile_pic_url': request.session.get('profile_pic_url'),
+            'display_name':request.session.get('display_name')
+            }
+            return render(request,'user.html',context)
     return render(request,'user.html',context)
 
 @login_access_only
