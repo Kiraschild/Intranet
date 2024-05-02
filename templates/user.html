@@ -14,8 +14,7 @@
     <div id="profile-container">
         <label for="file-input" class="buttons">Upload Picture</label>
         <input type="file" name="newprofilepic" id="file-input" >
-        <button type="button" onclick="removeProfilePicture()" class="buttons">Remove Picture</button>
-        <button type="submit" class="buttons"  name="profilepicChange"> Save Changes </button>
+        <button type="submit" class="buttons" name="profilepicChange"> Save Changes </button>
     </div>
 </form>
 
@@ -100,20 +99,20 @@
     <div id="password-container" style="display: none;">
         <div class="container">
             <label for="currentPassword">Current Password:</label>
-            <input type="password" id="currentPassword" name="currentPassword"  class="editable" placeholder="Enter current password">
-            <i class="far fa-eye-slash" id="toggleCurrentPassword" onclick="togglePasswordVisibility('currentPassword', 'toggleCurrentPassword')"></i>
+                <input type="password" id="currentPassword" name="currentPassword"  class="editable" placeholder="Enter current password">
+                <i class="fas fa-eye-slash" id="toggleCurrentPassword" onclick="togglePasswordVisibility('currentPassword', 'toggleCurrentPassword')"></i>
         </div>
 
         <div class="container">
             <label for="newPassword">New Password:</label>
-            <input type="password" id="newPassword" name="newPassword" class="editable" placeholder="Enter new password">
-            <i class="far fa-eye-slash" id="toggleNewPassword" onclick="togglePasswordVisibility('newPassword', 'toggleNewPassword')"></i>
+                <input type="password" id="newPassword" name="newPassword" class="editable" placeholder="Enter new password">
+                <i class="fas fa-eye-slash" id="toggleNewPassword" onclick="togglePasswordVisibility('newPassword', 'toggleNewPassword')"></i>
         </div>
 
         <div class="container">
             <label for="confirmPassword">Confirm new Password:</label>
-            <input type="password" id="confirmPassword" name="confirmPassword"  class="editable" placeholder="Enter new password again">
-            <i class="far fa-eye-slash" id="toggleConfirmPassword" onclick="togglePasswordVisibility('confirmPassword', 'toggleConfirmPassword')"></i>
+                <input type="password" id="confirmPassword" name="confirmPassword" class="editable" placeholder="Enter new password again">
+                <i class="fas fa-eye-slash" id="toggleConfirmPassword" onclick="togglePasswordVisibility('confirmPassword', 'toggleConfirmPassword')"></i>
         </div>
         
         <div class="container">
@@ -127,26 +126,26 @@
     <div id="address-container" style="display: none;">
         <div class="container">
             <label for="new_address_line_1">Address Line 1:</label>
-            <input type="text" name="new_address_line_1" value="new_address_line_1" id="new_address_line_1" class="editable" placeholder="Enter address line 1">
+            <input type="text" name="new_address_line_1" value="" id="new_address_line_1" class="editable" placeholder="Enter address line 1">
 
             <label for="new_address_line_2">Address Line 2:</label>
-            <input type="text" name="new_address_line_2" value="new_address_line_2" id="new_address_line_2" class="editable" placeholder="Enter address line 2">
+            <input type="text" name="new_address_line_2" value="" id="new_address_line_2" class="editable" placeholder="Enter address line 2">
         </div>
 
         <div class="container">
             <label for="new_city">City:</label>
-            <input type="text" name="new_city" value="new_city" id="new_city" class="editable" placeholder="Enter city">
+            <input type="text" name="new_city" value="" id="new_city" class="editable" placeholder="Enter city">
 
             <label for="new_pincode">Pincode:</label>
-            <input type="text" name="new_pincode" value="new_pincode" id="new_pincode" class="editable" placeholder="Enter pincode">
+            <input type="text" name="new_pincode" value="" id="new_pincode" class="editable" placeholder="Enter pincode">
         </div>
 
         <div class="container">
             <label for="new_state">State:</label>
-            <input type="text" name="new_state" value="new_state" id="new_state" class="editable" placeholder="Enter state">
+            <input type="text" name="new_state" value="" id="new_state" class="editable" placeholder="Enter state">
 
             <label for="new_country">Country:</label>
-            <input type="text" name="new_country" value="new_country" id="new_country" class="editable" placeholder="Enter country">
+            <input type="text" name="new_country" value="" id="new_country" class="editable" placeholder="Enter country">
         </div>
 
         <div class="container">
@@ -177,7 +176,8 @@
             pincode: '{{ pincode }}',
             state: '{{ state }}',
             country: '{{ country }}',
-            dob: '14/01/2003',
+            // dob: '14/01/2003',
+            dob: '{{ dob }}',
             gender: '{{ gender }}',
             qualification: '{{ quali }}',
             position: '{{ position }}',
@@ -190,9 +190,6 @@
             document.getElementById(key).textContent = value;
         });
     }
-    
-    
-    
     
     document.addEventListener("DOMContentLoaded", function () {
         // Fetch user data from the database
@@ -213,11 +210,6 @@
         });
     });
     
-    function removeProfilePicture() {
-        const profilePicture = document.getElementById('profile-picture');
-        profilePicture.src = 'static/img/default.png';
-    }
-    
     function showPasswordFields() {
         // Show the password container when the button is clicked
         if (document.getElementById('password-container').style.display == 'none') {
@@ -236,9 +228,6 @@
         }
     }
     
-   
-    
-    // Attach event listeners to buttons
     document.getElementById('change-password-button').addEventListener('click', showPasswordFields);
     document.getElementById('change-address-button').addEventListener('click', showAddressFields);
     document.getElementById('save-changes-button').addEventListener('click', saveChanges);
@@ -249,27 +238,13 @@
     
         if (passwordInput.type === 'password') {
             passwordInput.type = 'text';
-            eyeIcon.classList.remove('far', 'fa-eye-slash');
-            eyeIcon.classList.add('far', 'fa-eye');
+            eyeIcon.classList.remove('fas', 'fa-eye-slash');
+            eyeIcon.classList.add('fas', 'fa-eye');
         } else {
             passwordInput.type = 'password';
-            eyeIcon.classList.remove('far', 'fa-eye');
-            eyeIcon.classList.add('far', 'fa-eye-slash');
+            eyeIcon.classList.remove('fas', 'fa-eye');
+            eyeIcon.classList.add('fas', 'fa-eye-slash');
         }
-    }
-    
-    
-    
-    // var x = 0;
-    // function showHide() {
-    //     if(x==0) {
-    //         document.getElementById('text').style='display:none;';
-    //         x=1;    
-    //     } else {
-    //         document.getElementById('text').style='display:block;';
-    //         x=0;    
-    //     }
-    // }
-    
+    }    
 </script>
 {% endblock script %}

@@ -8,6 +8,7 @@ from django.contrib import messages
 from django.urls import reverse
 from .decorators import login_access_only, isUser
 import datetime
+from . import urls
 
 # Create your views here.
 
@@ -25,7 +26,8 @@ def login_user(request):
             user= user_data.objects.get(Username=username)
             print(user)
             print(user.is_user)
-            if user.Password == password and user.is_user== True:
+            print(user.is_admin)
+            if user.Password == password and (user.is_user== True or user.is_admin== True):
                 display_name= user.FirstName + " " + user.LastName
                 quali= user.Qualifications
                 profile_pic_url= user.Profilepic.url
@@ -41,13 +43,21 @@ def login_user(request):
                 request.session['state']= user.State
                 request.session['country']= user.Country
                 request.session['pincode']= user.Pincode
-                #request.session['dob']= user.DateofBirth
+                request.session['dob']= user.DateofBirth.strftime('%Y-%m-%d')
                 if user.Gender == 'M':
                     request.session['gender']= "Male"
                 elif user.Gender == 'F':
                     request.session['gender'] = "Female"
                 else:
                     request.session['gender']= "Others"
+                if user.is_admin:
+                    menu_list= urls.AdminMenulist
+                elif user.is_user:
+                    menu_list= urls.UserMenulist
+                else:
+                    menu_list= None 
+                print(menu_list)
+                request.session['menu_list']=menu_list
                 request.session['quali']=quali
                 request.session['position']= user.Position
                 request.session['department']= user.Department
@@ -58,7 +68,7 @@ def login_user(request):
                 print(profile_pic_url)
                 messages.success(request,"Successfully logged in!")
                 print("User logged in",user)
-                return render(request,'index.html',{'display_name': display_name, 'position':user.Position, 'profile_pic_url':profile_pic_url})
+                return render(request,'index.html',{'display_name': display_name, 'position':user.Position, 'profile_pic_url':profile_pic_url, 'menu_list':menu_list})
             else :
                 messages.error(request,"Check Credentials")
                 return render(request,'login.html')
@@ -142,6 +152,8 @@ def logout_user(request):
 @login_access_only
 def index(request): 
     #user= user_data.objects.get(Username=request.session.Username)
+    dob_str = request.session.get('dob')
+    date_of_birth = timezone.datetime.strptime(dob_str, '%Y-%m-%d').date()
     context = {
         'username': request.session.get('username'),
         'password': request.session.get('password'),
@@ -154,7 +166,7 @@ def index(request):
         'state': request.session.get('state'),
         'pincode': request.session.get('pincode'),
         'country': request.session.get('country'),
-        #'dob': request.session.get('dob'),
+        'dob': date_of_birth,
         'gender': request.session.get('gender'),
         'quali': request.session.get('quali'),
         'position': request.session.get('position'),
@@ -163,7 +175,8 @@ def index(request):
         'email': request.session.get('email'),
         'phone_number': request.session.get('phone_number'),
         'profile_pic_url': request.session.get('profile_pic_url'),
-        'display_name':request.session.get('display_name')
+        'display_name':request.session.get('display_name'),
+        'menu_list': request.session.get('menu_list')
     }
     print(request.session.get('reports'))
     return render(request,'index.html',context)
@@ -173,19 +186,22 @@ def home(request):
     display_name= request.session.get('display_name')
     position = request.session.get('position')
     profile_pic_url = request.session.get('profile_pic_url')
-    return render(request,'home.html',{'display_name': display_name, 'position':position, 'profile_pic_url':profile_pic_url})
+    menu_list= request.session.get('menu_list')
+    return render(request,'home.html',{'display_name': display_name, 'position':position, 'profile_pic_url':profile_pic_url, 'menu_list':menu_list})
 
 @login_access_only
 def dashboard(request): 
     display_name= request.session.get('display_name')
     position = request.session.get('position')
     profile_pic_url = request.session.get('profile_pic_url')
-    return render(request,'dashboard.html',{'display_name': display_name, 'position':position, 'profile_pic_url':profile_pic_url})
+    menu_list= request.session.get('menu_list')
+    return render(request,'dashboard.html',{'display_name': display_name, 'position':position, 'profile_pic_url':profile_pic_url, 'menu_list':menu_list})
     
 
 @login_access_only
 def user(request): 
-    
+    dob_str = request.session.get('dob')
+    date_of_birth = timezone.datetime.strptime(dob_str, '%Y-%m-%d').date(),
     context = {
         'username': request.session.get('username'),
         'password': request.session.get('password'),
@@ -198,7 +214,7 @@ def user(request):
         'state': request.session.get('state'),
         'pincode': request.session.get('pincode'),
         'country': request.session.get('country'),
-        #'dob': request.session.get('dob'),
+        'dob': date_of_birth,
         'gender': request.session.get('gender'),
         'quali': request.session.get('quali'),
         'position': request.session.get('position'),
@@ -207,7 +223,8 @@ def user(request):
         'email': request.session.get('email'),
         'phone_number': request.session.get('phone_number'),
         'profile_pic_url': request.session.get('profile_pic_url'),
-        'display_name':request.session.get('display_name')
+        'display_name':request.session.get('display_name'),
+        'menu_list': request.session.get('menu_list')
     }
     if request.method =="POST":
         if 'passwordChange' in request.POST:
@@ -237,7 +254,7 @@ def user(request):
                         'state': request.session.get('state'),
                         'pincode': request.session.get('pincode'),
                         'country': request.session.get('country'),
-                        #'dob': request.session.get('dob'),
+                        'dob': date_of_birth,
                         'gender': request.session.get('gender'),
                         'quali': request.session.get('quali'),
                         'position': request.session.get('position'),
@@ -246,7 +263,8 @@ def user(request):
                         'email': request.session.get('email'),
                         'phone_number': request.session.get('phone_number'),
                         'profile_pic_url': request.session.get('profile_pic_url'),
-                        'display_name':request.session.get('display_name')
+                        'display_name':request.session.get('display_name'),
+                        'menu_list': request.session.get('menu_list')
                         }
                         return render(request, 'user.html', context)    
                     else:
@@ -290,7 +308,7 @@ def user(request):
             'state': request.session.get('state'),
             'pincode': request.session.get('pincode'),
             'country': request.session.get('country'),
-            #'dob': request.session.get('dob'),
+            'dob': date_of_birth,
             'gender': request.session.get('gender'),
             'quali': request.session.get('quali'),
             'position': request.session.get('position'),
@@ -299,7 +317,8 @@ def user(request):
             'email': request.session.get('email'),
             'phone_number': request.session.get('phone_number'),
             'profile_pic_url': request.session.get('profile_pic_url'),
-            'display_name':request.session.get('display_name')
+            'display_name':request.session.get('display_name'),
+            'menu_list': request.session.get('menu_list')
             }
             return render(request,'user.html',context)
         
@@ -311,7 +330,6 @@ def user(request):
             user.Profilepic= newprofileurl
             print(newprofileurl)
             user.save()
-            
             user= user_data.objects.get(Username= currentUser)
             newurl= user.Profilepic.url
             print(newurl)
@@ -328,7 +346,7 @@ def user(request):
             'state': request.session.get('state'),
             'pincode': request.session.get('pincode'),
             'country': request.session.get('country'),
-            #'dob': request.session.get('dob'),
+            'dob': date_of_birth,
             'gender': request.session.get('gender'),
             'quali': request.session.get('quali'),
             'position': request.session.get('position'),
@@ -337,7 +355,8 @@ def user(request):
             'email': request.session.get('email'),
             'phone_number': request.session.get('phone_number'),
             'profile_pic_url': request.session.get('profile_pic_url'),
-            'display_name':request.session.get('display_name')
+            'display_name':request.session.get('display_name'),
+            'menu_list': request.session.get('menu_list')
             }
             return render(request,'user.html',context)
     return render(request,'user.html',context)
@@ -348,6 +367,7 @@ def event(request):
     display_name= request.session.get('display_name')
     position = request.session.get('position')
     profile_pic_url = request.session.get('profile_pic_url')
+    menu_list = request.session.get('menu_list')
 
     if request.method == 'POST':
         current_user = currentUser
@@ -375,7 +395,7 @@ def event(request):
         # events = Event.objects.filter(username=currentUser)
         events = Event.objects.all()
         event_data = Event.objects.filter(username=request.session.get('username'))
-        return render(request,'event.html',{'display_name': display_name, 'position':position, 'profile_pic_url':profile_pic_url, 'events': event_data})
+        return render(request,'event.html',{'display_name': display_name, 'position':position, 'profile_pic_url':profile_pic_url, 'events': event_data, 'menu_list':menu_list})
 
 
 @login_access_only
@@ -383,7 +403,8 @@ def task(request):
     display_name= request.session.get('display_name')
     position = request.session.get('position')
     profile_pic_url = request.session.get('profile_pic_url')
-    return render(request,'task.html',{'display_name': display_name, 'position':position, 'profile_pic_url':profile_pic_url})
+    menu_list = request.session.get('menu_list')
+    return render(request,'task.html',{'display_name': display_name, 'position':position, 'profile_pic_url':profile_pic_url, 'menu_list':menu_list})
 
 @login_access_only
 def timesheet(request):
@@ -391,6 +412,7 @@ def timesheet(request):
     display_name= request.session.get('display_name')
     position = request.session.get('position')
     profile_pic_url = request.session.get('profile_pic_url') 
+    menu_list= request.session.get('menu_list')
     if request.method == 'POST':
         username = request.session.get('username')  # Retrieve username from session
         if 'check_in' in request.POST:
@@ -439,11 +461,60 @@ def timesheet(request):
 
     timesheet_data = TimeSheetData.objects.filter(username=request.session.get('username'))
       
-    return render(request,'timesheet.html',{'display_name': display_name, 'position':position, 'profile_pic_url':profile_pic_url,'timesheet_data': timesheet_data})
+    return render(request,'timesheet.html',{'display_name': display_name, 'position':position, 'profile_pic_url':profile_pic_url,'timesheet_data': timesheet_data, 'menu_list': menu_list})
 
 @login_access_only
 def leave(request): 
     display_name= request.session.get('display_name')
     position = request.session.get('position')
     profile_pic_url = request.session.get('profile_pic_url')
-    return render(request,'leave.html',{'display_name': display_name, 'position':position, 'profile_pic_url':profile_pic_url})
+    menu_list= request.session.get('menu_list')
+    return render(request,'leave.html',{'display_name': display_name, 'position':position, 'profile_pic_url':profile_pic_url, 'menu_list': menu_list})
+
+@login_access_only
+def manageadmin(request): 
+    display_name= request.session.get('display_name')
+    position = request.session.get('position')
+    profile_pic_url = request.session.get('profile_pic_url')
+    menu_list= request.session.get('menu_list')
+    return render(request,'admin.html',{'display_name': display_name, 'position':position, 'profile_pic_url':profile_pic_url, 'menu_list': menu_list})
+
+@login_access_only
+def activeusers(request): 
+    display_name= request.session.get('display_name')
+    position = request.session.get('position')
+    profile_pic_url = request.session.get('profile_pic_url')
+    menu_list= request.session.get('menu_list')
+    return render(request,'activeusers.html',{'display_name': display_name, 'position':position, 'profile_pic_url':profile_pic_url, 'menu_list': menu_list})
+
+@login_access_only
+def companypolicy(request): 
+    display_name= request.session.get('display_name')
+    position = request.session.get('position')
+    profile_pic_url = request.session.get('profile_pic_url')
+    menu_list= request.session.get('menu_list')
+    return render(request,'policy.html',{'display_name': display_name, 'position':position, 'profile_pic_url':profile_pic_url, 'menu_list': menu_list})
+
+@login_access_only
+def checkinout(request): 
+    display_name= request.session.get('display_name')
+    position = request.session.get('position')
+    profile_pic_url = request.session.get('profile_pic_url')
+    menu_list= request.session.get('menu_list')
+    return render(request,'checkinout.html',{'display_name': display_name, 'position':position, 'profile_pic_url':profile_pic_url, 'menu_list': menu_list})
+
+@login_access_only
+def holidays(request): 
+    display_name= request.session.get('display_name')
+    position = request.session.get('position')
+    profile_pic_url = request.session.get('profile_pic_url')
+    menu_list= request.session.get('menu_list')
+    return render(request,'holidays.html',{'display_name': display_name, 'position':position, 'profile_pic_url':profile_pic_url, 'menu_list': menu_list})
+
+@login_access_only
+def birthday(request): 
+    display_name= request.session.get('display_name')
+    position = request.session.get('position')
+    profile_pic_url = request.session.get('profile_pic_url')
+    menu_list= request.session.get('menu_list')
+    return render(request,'birthday.html',{'display_name': display_name, 'position':position, 'profile_pic_url':profile_pic_url, 'menu_list': menu_list})
