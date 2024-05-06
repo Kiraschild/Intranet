@@ -9,7 +9,7 @@ urlpatterns = [
     path('login', views.login_user, name='login_user'),
     path('register',views.register_user, name="register"),
     path("logout",views.logout_user,name="logout_user"),
-    path('index/', views.index, name='index'),
+    path('index', views.index, name='index'),
     path('home', views.home, name='home'),
     path('dashboard', views.dashboard, name='dashboard'),
     path('user', views.user, name='user'),
@@ -28,33 +28,35 @@ urlpatterns = [
 
 
 AdminMenulist=[
-    ['User Task','/task'],
-    ['Active Users','/activeusers'],
-    ['Admin Page','/manageadmin'],
-    ['User Management','/user'],
-    ['Event Calendar','/event'],
-    ['Check-In Check-Out','/checkinout'],
-    ['Company Policy','/policy'],
-    ['Leave Details','/leave'],
-    ['Holiday List','/holidayspage'],
-    ['Birthdays','/birthdays'],
-    ['Timesheet','/timesheet'],
-    ['Dashboard','/dashboard'],
-    ['Home','/home'],
-    ['Index','/index']
+    ['Home','/home','home'],
+    ['Dashboard','/dashboard','grid-alt'],
+    ['User','/user','user'],
+    ['Event Calendar','/event','calendar'],
+    ['Leave','/leave','envelope'],
+    ['Tasks','/task','task'],
+    ['Check-In Check-Out','/checkinout','check-circle'],
+    ['Birthdays','/birthdays','cake'],
+    ['Timesheet','/timesheet','time'],
+    ['Holiday List','/holidayspage','landscape'],
+    ['Company Policy','/policy','buildings'],
+    ['Active Users','/activeusers','user-check'],
+    ['Admin Page','/manageadmin','cog'],
+    ['User Management','/user','group'],
+    # ['Index','/index']
     
 ]
 
 UserMenulist=[
-    ['User Task','/task'],
-    ['Event Calendar','/event'],
-    ['Check-In Check-Out','/checkinout'],
-    ['Company Policy','/policy'],
-    ['Leave Details','/leave'],
-    ['Holiday List','/holidayspage'],
-    ['Birthdays','/birthdays'],
-    ['Timesheet','/timesheet'],
-    ['Dashboard','/dashboard'],
-    ['Home','/home'],
-    ['Index','/index']
+    ['Home','/home','home'],
+    ['Dashboard','/dashboard','grid-alt'],
+    ['User','/user','user'],
+    ['Event Calendar','/event','calendar'],
+    ['Leave','/leave','envelope'],
+    ['Tasks','/task','task'],
+    ['Check-In Check-Out','/checkinout','check-circle'],
+    ['Birthdays','/birthdays','cake'],
+    ['Timesheet','/timesheet','time'],
+    ['Holiday List','/holidayspage','landscape'],
+    ['Company Policy','/policy','buildings'],
+    # ['Index','/index']
 ]

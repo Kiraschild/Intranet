@@ -68,7 +68,9 @@ def login_user(request):
                 print(profile_pic_url)
                 messages.success(request,"Successfully logged in!")
                 print("User logged in",user)
-                return render(request,'index.html',{'display_name': display_name, 'position':user.Position, 'profile_pic_url':profile_pic_url, 'menu_list':menu_list})
+                # Commented out the below line because when index is rendered the url does not change. the page needs to be redirected
+                # return render(request,'index.html',{'display_name': display_name, 'position':user.Position, 'profile_pic_url':profile_pic_url, 'menu_list':menu_list})
+                return redirect('home')
             else :
                 messages.error(request,"Check Credentials")
                 return render(request,'login.html')
@@ -201,7 +203,7 @@ def dashboard(request):
 @login_access_only
 def user(request): 
     dob_str = request.session.get('dob')
-    date_of_birth = timezone.datetime.strptime(dob_str, '%Y-%m-%d').date(),
+    date_of_birth = timezone.datetime.strptime(dob_str, '%Y-%m-%d').date()
     context = {
         'username': request.session.get('username'),
         'password': request.session.get('password'),

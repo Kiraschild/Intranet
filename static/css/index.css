@@ -20,9 +20,14 @@
     height: 100%;
     width: 78px;
     background: var(--primary-color);
-    padding: 6px 14px;
+    padding: 0px 14px;
     z-index: 99;
     transition: all 0.5s ease;
+    overflow-y: auto;
+}
+
+.sidebar::-webkit-scrollbar {
+    display: none;
 }
 
 .sidebar.open {
@@ -64,7 +69,7 @@
 }
 
 .sidebar .logo-details i {
-    height: 30px;
+    /* height: 30px; */
     width: 30px;
     object-fit: cover;
     border-radius: 6px;
@@ -118,13 +123,13 @@
 }
 
 .sidebar .nav-list {
-    margin-top: 20px;
-    height: 100%;
+    margin-top: 60px;
+    height: 100vh;
 }
 
 .sidebar li {
     position: relative;
-    margin: 8px 0;
+    /* margin: 8px 0px; */
     list-style: none;
 }
 
@@ -250,7 +255,7 @@
     height: 60px;
     width: 78px;
     left: 0;
-    bottom: -8px;
+    bottom: 0px;
     padding: 10px 14px;
     background: var(--primary-color);
     transition: all 0.5s ease;
@@ -308,7 +313,6 @@
 .home-section {
     position: absolute;
     background: var(--secondary-color);
-    /* background: #ccf6fa; */
     min-height: 100vh;
     top: 0;
     left: 78px;
@@ -383,10 +387,58 @@
 
 #log_out:hover {
     color: var(--secondary-color);
+    cursor: pointer;
 }
 
 .sidebar.closed .logo_name {
     opacity: 1;
     pointer-events: auto;
     margin-left: 1000px; /* Add margin to create space so that month can be clicked */
-  }
+}
+
+.sidebar li.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 60px; /* Adjust height as needed */
+    width: 78px; /* Adjust width as needed */
+    /* padding: 10px 14px;  */
+    padding: 0px 14px; 
+    background: var(--primary-color);
+    z-index: 100; /* Ensure it's above other scrolling items */
+    transition: all 0.5s ease;
+    overflow: hidden;
+    padding: -1px 5px;
+}
+
+.sidebar.open li.header {
+    width: 250px; /* Adjust width for open sidebar */
+}
+
+.sidebar li.header .logo-details {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.sidebar li.header .logo-details img {
+    height: 30px;
+    width: 30px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-right: 10px;
+}
+
+.sidebar li.header .logo-details .logo_name {
+    color: var(--secondary-color);
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.sidebar li.header #btn {
+    position: absolute;
+    top: 50%;
+    right: -9px;
+    transform: translateY(-50%);
+    font-size: 22px;
+}
