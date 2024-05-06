@@ -1,6 +1,6 @@
 :root {
     --primary-color: #4747a1;
-    --secondary-color:#f4f7fe;
+    --secondary-color: #f4f7fe;
 }
 
 #profile-container {
@@ -10,17 +10,18 @@
     align-items: center;
 }
 
-#leaveFormContent{
+#leaveFormContent {
     display: none;
 }
 
-#leavesection2heading{
+#leavesection2heading {
     margin-top: 40px;
     margin-bottom: 10px;
     text-align: center;
+    font-weight: bold;
 }
 
-#leaveForm{
+#leaveForm {
     margin-top: 100px;
 }
 
@@ -28,16 +29,6 @@
     height: 100vh;
     background-color: rgba(255, 255, 255, 0.9);
     padding: 20px;
-  }
-
-table {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
-    background-color: rgba(255, 255, 255, 0.8);
-    border-radius: 10px;
-    overflow-y: auto; /* Enable vertical scrolling */
-    max-height: calc(100vh - 150px);
 }
 
 table {
@@ -46,20 +37,19 @@ table {
     border-spacing: 0;
     background-color: rgba(255, 255, 255, 0.8);
     border-radius: 10px;
-    overflow-y: auto; /* Enable vertical scrolling */
+    overflow-y: auto;
     max-height: calc(100vh - 150px);
 }
 
-table, th, td {
+table,
+th,
+td {
     font-size: 20px;
-    /* border: 1px solid black;  */
-    /* border-collapse: collapse;  */
-    padding: 10px; /* Add padding to cells */
+    padding: 10px;
 }
 
-/* Optional: Add styling for table header */
 th {
-    background-color: #f2f2f2; /* Light grey background */
+    background-color: #f2f2f2;
 }
 
 td {
@@ -75,14 +65,14 @@ button {
     border: none;
     border-radius: 5px;
     margin-right: 10px;
-  }
-  
-  button:hover {
+}
+
+button:hover {
     background-color: #45a049;
-  }
+}
 
 
-  #overlayForm {
+#overlayForm {
     display: none;
     position: fixed;
     top: 0;
@@ -96,14 +86,14 @@ button {
 #leaveFormContent {
     display: none;
     position: fixed;
-    height: auto;
-    width: auto;
+    height: 381px;
+    width: 400px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: var(--secondary-color);
     color: var(--primary-color);
-    padding: 20px;
+    padding: 5px;
     border-radius: 5px;
     z-index: 1000;
 }
@@ -114,4 +104,28 @@ button {
 
 .cancel_button:hover {
     background-color: #ff0000;
+}
+
+.form-group {
+    display: flex;
+    padding: 10px;
+    justify-content: center;
+}
+
+.leave-form-buttons {
+    text-align: center;
+    padding: 10px;
+}
+
+input {
+    text-align: center;
+    margin: 5px;
+}
+
+#subject {
+    width: 220px;
+}
+
+label {
+    font-weight: 600;
 }

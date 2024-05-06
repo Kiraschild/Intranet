@@ -16,39 +16,35 @@
     </div>
 
     <form id="leaveFormContent" method="POST">
-        <!-- CSRF token for security -->
         {% csrf_token %}
 
-        <!-- Leave ID field -->
         <div class="form-group">
-            <label id="leave_id" for="leave_id">Leave ID:</label>
+            <label id="leave_id" for="leave_id">Leave ID: </label>
         </div>
 
-        <!-- Leave Date field -->
         <div class="form-group">
-            <label for="leave_Startdate">Start Date:</label>
+            <label for="leave_Startdate">Start Date</label>
             <input type="date" id="leave_Startdate" name="leave_Startdate" class="form-control" required>
         </div>
 
         <div class="form-group">
-            <label for="leave_Enddate">End Date:</label>
+            <label for="leave_Enddate">End Date</label>
             <input type="date" id="leave_Enddate" name="leave_Enddate" class="form-control" required>
         </div>
 
-        <!-- Subject field -->
         <div class="form-group">
-            <label for="subject">Subject:</label>
-            <input type="text" id="subject" name="subject" class="form-control" required>
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" name="subject" class="form-control" placeholder="Enter the subject for the leave" required> 
         </div>
 
-        <!-- Status field -->
         <div class="form-group">
-            <label for="status">Status: Not yet approved</label>
+            <label for="status">Status: </label>
         </div>
 
-        <!-- Submit button -->
-        <button type="button" onclick="submitleaveform(event)">Submit</button>
-        <button type="button" class="cancel_button" onclick="cancelButton()">Cancel</button>
+        <div class="leave-form-buttons">
+            <button type="button" onclick="submitleaveform(event)">Submit</button>
+            <button type="button" class="cancel_button" onclick="cancelButton()">Cancel</button>
+        </div>
     </form>
 
     <div id="leavesection2heading">Previous Records</div>

@@ -18,15 +18,21 @@
 
     <form method="post" action="/register" enctype="multipart/form-data" >
         {% csrf_token %}
-        <h1>   Techsture Technologies</h1>
+        <h1>Techsture Technologies</h1>
+            
             <div id="profile-container">
                 <img id="profile-picture" src="{{ profile_pic_url }}" alt="Profile Picture">
             </div>
-            <div id="profile-container">
+            {% comment %} <div id="profile-container">
                 <label for="file-input" class="buttons">Upload Picture</label>
                 <input type="file" name="profilepic" id="profilepic">
-                
-            </div>
+            </div> {% endcomment %}
+            <div id="profile-container">
+                <label for="profilepic" class="buttons">Upload Picture</label>
+                <input type="file" name="profilepic" id="profilepic" style="display: none;">
+            </div>           
+
+
             <div class="container">
                 <label for="fname">First Name<span class="required">*</span></label>
                 <input type="text" id="fname" name="fname" class="editable" placeholder="Enter your first name">
@@ -51,7 +57,7 @@
             
             <div class="container">
                 <label for="password">Password</label>
-                <input type="text" id="password" name="password" class="editable" placeholder="Enter password(default:admin123)">
+                <input type="text" id="password" name="password" class="editable" placeholder="Enter password (Default: admin123)">
         
                 <label for="dob">Date of birth<span class="required">*</span></label>
                 <input type="date" id="dob" name="dob" class="editable">
@@ -60,10 +66,10 @@
         
             <div class="container">
                 <label for="address_line_1">Address Line 1<span class="required">*</span></label>
-                <input type="text" id="address1" name="address1" class="editable" placeholder="Enter permanent address">
+                <input type="text" id="address1" name="address1" class="editable" placeholder="Enter address line 1">
         
                 <label for="address_line_2">Address Line 2:</label>
-                <input type="text" id="address2" name="address2" class="editable" placeholder="Enter permanent address">
+                <input type="text" id="address2" name="address2" class="editable" placeholder="Enter address line 2">
             </div>
         
             <div class="container">
@@ -93,7 +99,7 @@
             </div>
         
             <div class="container">
-                <label for="qualification">Qualifications<span class="required">*</span></label>
+                <label for="qualification">Qualification<span class="required">*</span></label>
                 <input type="text" id="qualification" name="qualification" class="editable" placeholder="Enter Qualification">
         
                 <label for="position">Position<span class="required">*</span></label>

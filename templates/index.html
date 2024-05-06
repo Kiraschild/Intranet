@@ -16,27 +16,26 @@
 
 <body>
     <div class="sidebar">
-        <div class="logo-details">
-            <img src="static/img/techsture_icon.webp" alt="techsture_icon">
-            <div class="logo_name">Techsture Technologies</div>
-            <i class='bx bx-menu' id="btn"></i>
-        </div>
-        {% if menu_list %}
         <ul class="nav-list">
-            {% comment %} <li>
-                <i class='bx bx-search'></i>
-                <input type="text" placeholder="Search...">
-                <span class="tooltip">Search</span>
-            </li> {% endcomment %}
-            <li>
-                {% for item in menu_list %}
-                <li><a href="{{ item.1 }}">
-                    <i class='bx bx-home'></i>
-                    <span class="links_name">{{ item.0 }}</span>
-                </a>
-                <span class="tooltip">{{item.0}}</span>
+            <li class="header">
+                <div class="logo-details">
+                    <img src="static/img/techsture_icon.webp" alt="techsture_icon">
+                    <div class="logo_name">Techsture Technologies</div>
+                    <i class='bx bx-menu' id="btn"></i>
+                </div>
             </li>
+
+            {% if menu_list %}
+                {% for item in menu_list %}
+                <li>
+                    <a href="{{ item.1 }}">
+                        <i class='bx bx-{{ item.2 }}'></i>
+                        <span class="links_name">{{ item.0 }}</span>
+                    </a>
+                    <span class="tooltip">{{ item.0 }}</span>
+                </li>
                 {% endfor %}
+            {% endif %}
 
             <li class="profile">
                 <div class="profile-details">
@@ -46,14 +45,13 @@
                         <div class="job">{{ position }}</div>
                     </div>
                 </div>
-                <a href="#" id="logout_button">
+                {% comment %} <a href="#" id="logout_button"> {% endcomment %}
                     <i class='bx bx-log-out' id="log_out" onclick="showConfirmationDialog()"></i>
-                    <span class="links_name">Logout</span>
-                </a>
-                <span class="tooltip">Logout</span>
+                    {% comment %} <span class="links_name">Logout</span> {% endcomment %}
+                {% comment %} </a> {% endcomment %}
+                {% comment %} <span class="tooltip">Logout</span> {% endcomment %}
             </li>
         </ul>
-    {% endif %}
     </div>
 
     <section class="home-section">
