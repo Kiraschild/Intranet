@@ -65,6 +65,8 @@ def login_user(request):
                 request.session['email']= user.Email
                 request.session['phone_number']= user.Phone_number
                 request.session['profile_pic_url']=profile_pic_url
+                request.session['is_user']=user.is_user
+                request.session['is_admin']=user.is_admin
                 print(profile_pic_url)
                 messages.success(request,"Successfully logged in!")
                 print("User logged in",user)
@@ -178,7 +180,9 @@ def index(request):
         'phone_number': request.session.get('phone_number'),
         'profile_pic_url': request.session.get('profile_pic_url'),
         'display_name':request.session.get('display_name'),
-        'menu_list': request.session.get('menu_list')
+        'menu_list': request.session.get('menu_list'),
+        'is_user': request.session.get('is_user'),
+        'is_admin':request.session.get('is_admin')
     }
     print(request.session.get('reports'))
     return render(request,'index.html',context)
@@ -199,7 +203,27 @@ def dashboard(request):
     menu_list= request.session.get('menu_list')
     return render(request,'dashboard.html',{'display_name': display_name, 'position':position, 'profile_pic_url':profile_pic_url, 'menu_list':menu_list})
     
+#@login_access_only
+def adminuser(request):
+    print("hello")
+    users= user_data.objects.all()
+    print(users)
+    context= {
+        'users':users,
+        'is_admin':request.session.get('is_admin'),
+        'is_user':request.session.get('is_user'),
+        'display_name': request.session.get('display_name'),
+        'position': request.session.get('position'),
+        'profile_pic_url' : request.session.get('profile_pic_url'),
+        'menu_list' : request.session.get('menu_list')
+    }
+    return render(request,'adminuser.html',context)
 
+def delete_user(request,username):
+    user= user_data.objects.get(Username=username)
+    user.delete()
+    return redirect('/adminuser')
+    
 @login_access_only
 def user(request): 
     dob_str = request.session.get('dob')
@@ -226,7 +250,9 @@ def user(request):
         'phone_number': request.session.get('phone_number'),
         'profile_pic_url': request.session.get('profile_pic_url'),
         'display_name':request.session.get('display_name'),
-        'menu_list': request.session.get('menu_list')
+        'menu_list': request.session.get('menu_list'),
+        'is_user': request.session.get('is_user'),
+        'is_admin':request.session.get('is_admin')
     }
     if request.method =="POST":
         if 'passwordChange' in request.POST:
@@ -320,7 +346,9 @@ def user(request):
             'phone_number': request.session.get('phone_number'),
             'profile_pic_url': request.session.get('profile_pic_url'),
             'display_name':request.session.get('display_name'),
-            'menu_list': request.session.get('menu_list')
+            'menu_list': request.session.get('menu_list'),
+            'is_user': request.session.get('is_user'),
+            'is_admin':request.session.get('is_admin')
             }
             return render(request,'user.html',context)
         
@@ -358,7 +386,9 @@ def user(request):
             'phone_number': request.session.get('phone_number'),
             'profile_pic_url': request.session.get('profile_pic_url'),
             'display_name':request.session.get('display_name'),
-            'menu_list': request.session.get('menu_list')
+            'menu_list': request.session.get('menu_list'),
+            'is_user': request.session.get('is_user'),
+            'is_admin':request.session.get('is_admin')
             }
             return render(request,'user.html',context)
     return render(request,'user.html',context)

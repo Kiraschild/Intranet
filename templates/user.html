@@ -87,13 +87,25 @@
         <label for="reporting">Reports To:</label>
         <div id="reporting" class="non-editable"></div>
     </div>
-
-    <div class="container">
-        <button type="button" class="buttons" id="change-password-button">Change Password</button>
-
-        <button type="button" class="buttons" id="change-address-button">Change Address</button>
-    </div>
+    
+    
 </form>
+{% if is_admin %}
+<div class="container">
+    <button type="button" class="buttons" id="change-password-button">Change Password</button>
+
+    <button type="button" class="buttons" id="change-address-button">Change Address</button>
+
+    <a href='/adminuser' class="buttons" id="user-list-button">View User Lists</button>
+</div>
+{% elif is_user %}
+<div class="container">
+    <button type="button" class="buttons" id="change-password-button">Change Password</button>
+
+    <button type="button" class="buttons" id="change-address-button">Change Address</button>
+</div>
+{% endif %}
+
 <form method="post" action="/user">  
     {% csrf_token %}
     <div id="password-container" style="display: none;">
