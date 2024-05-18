@@ -90,7 +90,7 @@
     
     
 </form>
-{% if is_admin %}
+{% comment %} {% if is_admin %}
 <div class="container">
     <button type="button" class="buttons" id="change-password-button">Change Password</button>
 
@@ -98,13 +98,13 @@
 
     <a href='/adminuser' class="buttons" id="user-list-button">View User Lists</button>
 </div>
-{% elif is_user %}
+{% elif is_user %} {% endcomment %}
 <div class="container">
     <button type="button" class="buttons" id="change-password-button">Change Password</button>
 
     <button type="button" class="buttons" id="change-address-button">Change Address</button>
 </div>
-{% endif %}
+{% comment %} {% endif %} {% endcomment %}
 
 <form method="post" action="/user">  
     {% csrf_token %}

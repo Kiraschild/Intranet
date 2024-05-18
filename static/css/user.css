@@ -3,10 +3,6 @@
     --secondary-color:#f4f7fe;
 }
 
-* {
-    font-size: 15px;
-}
-
 #profile-container {
     display: flex;
     flex-direction: row;
@@ -23,9 +19,11 @@
 
 #profile-container button {
     margin: 5px;
+    font-size: 15px;
 }
 
 .container {
+    font-size: 15px;
     display: flex;
     margin: 10px;
     justify-content: space-evenly;
@@ -35,11 +33,13 @@
 }
 
 .container label {
+    font-size: 15px;
     margin-bottom: 10px;
     width: 35%;
 } 
 
 .non-editable {
+    font-size: 15px;
     border: 1px solid black;
     padding: 5px;
     background-color: #f9f9f9;
@@ -47,6 +47,7 @@
 }
 
 .editable {
+    font-size: 15px;
     width: 35%;
     padding: 5px;
     box-sizing: border-box;
