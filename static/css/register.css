@@ -12,6 +12,13 @@ body::-webkit-scrollbar {
     display: none;
 }
 
+form *, ::placeholder {
+    font-family: 'Poppins', sans-serif;
+    color: var(--primary-color);
+    letter-spacing: 0.5px;
+    outline: none;
+}
+
 * {
     font-family: 'Poppins', sans-serif;
     font-size: 15px;
@@ -46,7 +53,7 @@ form h1 {
 
 .container {
     display: flex;
-    margin: 10px auto; /* Align container in the center */
+    margin: 10px auto; 
     justify-content: space-evenly;
     align-items: center;
     margin-bottom: 15px;
@@ -90,74 +97,15 @@ form h1 {
 
 .required {
     color: red;
-  }
-
-
-/*
-body{
-    color: #000;
-    overflow-x: hidden;
-    height: 100%;
-    background-image: url("https://i.imgur.com/GMmCQHC.png");
-    background-repeat: no-repeat;
-    background-size: 100% 100%
-}
-    
-.card{
-    padding: 30px 40px;
-    margin-top: 60px;
-    margin-bottom: 60px;
-    border: none !important;
-    box-shadow: 0 6px 12px 0 rgba(0,0,0,0.2)
 }
 
-.blue-text{
-    color: #00BCD4
+.radio-container {
+    display: flex;
 }
 
-.form-control-label{
-    margin-bottom: 0
+input[type="radio"] {
+    margin-bottom: 10px;
 }
-
-input, textarea, button{
-    padding: 8px 15px;
-    border-radius: 5px !important;
-    margin: 5px 0px;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    font-size: 18px !important;
-    font-weight: 300
-}
-
-input:focus, textarea:focus{
-    -moz-box-shadow: none !important;
-    -webkit-box-shadow: none !important;
-    box-shadow: none !important;
-    border: 1px solid #00BCD4;
-    outline-width: 0;
-    font-weight: 400
-}
-    
-.btn-block{
-    text-transform: uppercase;
-    font-size: 15px !important;
-    font-weight: 400;
-    height: 43px;
-    cursor: pointer
-}
-
-.btn-block:hover{
-    color: #fff !important
-}
-
-button:focus{
-    -moz-box-shadow: none !important;
-    -webkit-box-shadow: none !important;
-    box-shadow: none !important;
-    outline-width: 0
-}
-
-*/
 
 #profile-container {
     position: relative;
@@ -179,4 +127,9 @@ button:focus{
     width: 100%;
     height: 100%;
     cursor: pointer;
+}
+
+#gender-label {
+    /* width: 10%; */
+    /* margin-right: 100px; */
 }

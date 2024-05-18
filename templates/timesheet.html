@@ -9,24 +9,30 @@
 <div class="container">
   <center>
   <h1>Welcome, {{ display_name }}!</h1>
-  <form method="post" action="/timesheet">
+  {% comment %} <form method="post" action="/timesheet">
     {% csrf_token %}
     <button type="submit" name="check_in">Check in</button>
     <button type="submit" name="check_out">Check out</button>
-  </form>
+  </form> {% endcomment %}
   </center>
   <table id="checkInOutTable">
     <thead>
       <tr>
+        {% if isAdmin %}
+          <th>Username</th>
+        {% endif %}
         <th>Date</th>
-        <th>Check-In Time</th>
-        <th>Check-Out Time</th>
-        <th>Total Time</th> 
+        <th>Check-In</th>
+        <th>Check-Out</th>
+        <th>Session Time</th> 
       </tr>
     </thead>
     <tbody id="tableBody">
       {% for entry in timesheet_data %}
       <tr>
+        {% if isAdmin %}
+          <td>{{ entry.username }}</td>
+        {% endif %}
         <td>{{ entry.date }}</td>
         <td>{{ entry.check_in_time }}</td>
         <td>{{ entry.check_out_time }}</td>

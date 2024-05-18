@@ -1,23 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
-}
-
-:root {
-  --primary-color: #4747a1;
-  --secondary-color: #f4f7fe;
-}
-
 .fc-left h2 {
   color: var(--primary-color);
 }
 
 .fa {
-  display: inline-block !important;
+  /* display: inline-block !important; */
+  display: inline-block;
   margin-right: 0.5em;
 }
 
@@ -56,10 +43,6 @@ body {
   border-bottom: 0;
 }
 
-label {
-  padding: 0.2rem;
-}
-
 #calendar {
   padding: 20px;
   background-color: var(--secondary-color);
@@ -86,7 +69,8 @@ label {
 .modle-continer {
   background-color: var(--secondary-color);
   margin: 8% auto;
-  width: calc(70% - 78px);
+  /* width: calc(70% - 78px); */
+  width: 500px;
   box-shadow: 0 5px 8px rgba(0, 0, 0, 0.2), 0 7px 20px rgba(0, 0, 0, 0.2);
   animation-name: modalopen;
   animation-duration: 0.5s;
@@ -98,9 +82,11 @@ label {
   height: 50px;
   padding: 5px;
   text-align: center;
+  font-size: 25px;
 }
 
 .modal-body {
+  font-size: 20px;
   color: var(--primary-color);
 }
 
@@ -165,9 +151,12 @@ label {
   display: none;
 }
 
-.submitButton, .cancelButton, .deleteButton {
+.submitButton,
+.cancelButton,
+.deleteButton {
+  font-size: 15px;
   height: auto;
-  width:auto;
+  width: auto;
   padding: 5px;
   background-color: var(--primary-color);
   color: var(--secondary-color);
@@ -176,34 +165,29 @@ label {
   font-weight: 200;
   padding: 10px;
   margin: 10px;
+  font-weight: 400;
 }
 
-.submitButton:hover, .cancelButton:hover, .deleteButton:hover {
+.submitButton:hover,
+.cancelButton:hover,
+.deleteButton:hover {
   cursor: pointer;
-  font-weight: 400;
 }
 
 .fc-event {
   padding: 5px;
-  background-color: var(--primary-color) !important;
-  height: auto !important;
-  /* 
-  font-size: 12px; 
-  line-height: 1.2;  */
-  /* white-space: normal;  */
+  background-color: var(--primary-color);
+  height: auto;
+  color: var(--secondary-color);
+  border: 0px;
 }
 
 .fc-event .fc-bg {
-  z-index: 1 !important;
-  /* background: #fff; */
-  opacity: .25 !important;
+  z-index: 1;
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  opacity: .25;
 }
-
-/*
-.fc-time {
-  font-size: 15px;
-  font-weight: normal;
-}*/
 
 .fc-content {
   display: flex;
@@ -213,18 +197,89 @@ label {
 .fc-content *:not(.fc-title) {
   display: none;
 }
-/*
-.fc-bg {
-  background-color: var(--primary-color);
-  color: var(--secondary-color);
-} */
 
 .fc-event-container {
   background-color: var(--primary-color);
-  /* color: var(--secondary-color); */
 }
 
-/* .fc-unthemed td.fc-today {
-  background-color: #4747a1;
-  color: #f4f7fe;
-} */
+.form-group {
+  display: flex;
+  padding: 10px;
+  justify-content: center;
+}
+
+input,
+textarea {
+  text-align: center;
+  margin: 5px;
+}
+
+label {
+  font-weight: 600;
+}
+
+#event-title {
+  width: 200px;
+}
+
+#event-details {
+  width: 250px;
+  height: 100px;
+}
+
+textarea::-webkit-scrollbar {
+  display: none;
+}
+
+.deleteButton {
+  background-color: #ff2c2c;
+}
+
+.deleteButton:hover {
+  background-color: #ff0000;
+}
+
+.submitButton {
+  background-color: #4CAF50;
+}
+
+.submitButton:hover {
+  background-color: #45a049;
+}
+
+.cancelButton {
+  background-color: #007bff;
+}
+
+.cancelButton:hover {
+  background-color: #0070e9;
+}
+
+#overlayModal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+.modal-container {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+  padding: 20px;
+  border-radius: 5px;
+  z-index: 1000;
+  width: auto;
+  height: auto;
+}
+
+.modal-header, .modal-footer {
+  text-align: center;
+}
